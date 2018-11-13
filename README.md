@@ -8,5 +8,5 @@ $ npm install
 
 ## lauching in debug mode
 ```
-$ DEBUG=capstone:* npm start
+$ DEBUG=* npm start
 ```
