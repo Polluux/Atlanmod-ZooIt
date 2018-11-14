@@ -7,11 +7,18 @@ block content
 
   .block
     #form
-      form
+      div.form_half
+        
+      form.form_half
         label.field
           // div.field_name nom
           input(type="text", name="artefact_name").field_field
           div.field_description nom de l'artefact à générer
+
+        label.field
+          // div.field_name description
+          input(type="text", name="artefact_description").field_field
+          div.field_description description de l'artefact
 
         input(type="submit", name="submit")#submit_button
 

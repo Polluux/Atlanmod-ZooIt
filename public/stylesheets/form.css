@@ -1,5 +1,23 @@
+#form{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.form_half{
+	width: 49%;
+}
+
 form{
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: flex-start;
 }
 
 .field{
@@ -24,7 +42,10 @@ form{
 #submit_button{
 	padding: 6px 12px;
 	background-color: #7bd1db;
+	color: #FFF;
 	cursor: pointer;
+
+	align-self: flex-end;
 
 	box-shadow: 0 0 0 rgba(1,1,1,1);
 	transition: box-shadow ease 0.2s;
