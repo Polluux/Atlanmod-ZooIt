@@ -1,0 +1,22 @@
+#title{
+    box-sizing: border-box;
+    max-width:1080px;
+
+    margin: 0 auto 2em;
+}
+
+#title h1 {
+    font-size: 300%;
+}
+
+.block{
+    box-sizing: border-box;
+    max-width:1080px;
+
+    padding: 2em 5em;
+    margin: 10px auto;
+
+    background-color: #FFF;
+
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02);
+}
