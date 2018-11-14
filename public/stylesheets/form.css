@@ -11,7 +11,7 @@
 	width: 49%;
 }
 
-form{
+#form_fields{
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -32,7 +32,7 @@ form{
 
 .field_description{
 	font-size: 80%;
-	color: #6C6C6C;
+	color: var(--dark-gray);
 }
 
 .field_field{
@@ -41,7 +41,7 @@ form{
 
 #submit_button{
 	padding: 6px 12px;
-	background-color: #7bd1db;
+	background-color: var(--highlight);
 	color: #FFF;
 	cursor: pointer;
 
@@ -55,17 +55,23 @@ form{
     box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02);
 }
 
+#file_input{
+	height: 82px!important;
+	border: 3px dashed var(--highlight);
+	border-radius: 5px;
+}
+
 input, textarea{
 	border: 0;
 	padding: 3px 0;
 }
 
 input[type="text"]{
-	border-bottom: 1px solid #6C6C6C;
+	border-bottom: 1px solid var(--dark-gray);
 	transition: border ease 0.2s;
 }
 
 input[type="text"]:focus{
-    border-bottom-color: #7bd1db; 
+    border-bottom-color: var(--highlight);
 }
 

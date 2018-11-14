@@ -1,15 +1,16 @@
 extends layout
 
+
 block content
   #title
     h1 Moulinette
     p Transform your Xcore in Maven artefact
 
   .block
-    #form
+    form#form(action="/form/", method="post")
       div.form_half
-        
-      form.form_half
+        input#file_input(type="file", name="file")
+      div#form_fields.form_half
         label.field
           // div.field_name nom
           input(type="text", name="artefact_name").field_field
@@ -22,3 +23,7 @@ block content
 
         input(type="submit", name="submit")#submit_button
 
+  script(type="text/javascript", src="/libs/filepond/filepond.min.js")
+  script.
+    const inputElement = document.getElementById('file_input');
+    const pond = FilePond.create( inputElement );

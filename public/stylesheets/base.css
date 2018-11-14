@@ -1,6 +1,12 @@
+:root {
+  --light-gray: #EEE;
+  --dark-gray: #6C6C6C;
+  --highlight: #6497CC;
+}
+
 html{
 	min-height: 100%;
-	background-color: #EEE;
+	background-color: var(--light-gray);
 	margin: 0;
 	padding: 0;
 }
@@ -10,13 +16,6 @@ body {
 	font: 14px "Oxygen", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
-}
-
 h1, h2, h3, em {
 	font-family: "Quicksand", sans-serif;
 }
-
-
-
