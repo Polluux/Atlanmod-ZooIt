@@ -5,7 +5,7 @@ const zipFolder = require('zip-folder')
 
 function createFolder(dirPath){
 	try{
-		fs.mkdirSync(path.resolve(dirPath))
+		fs.mkdirSync(path.join(__dirname,"../services/",dirPath))
 	}catch(err){
 		if (err.code !== "EEXIST") throw err
 	}
@@ -24,7 +24,7 @@ function createFile(){
 }
 
 function zipArchitecture(dirPath, callback){
-	zipFolder(dirPath,dirPath+'.zip',function(err,res){
+	zipFolder(path.join(__dirname,"../services/",dirPath),path.join(__dirname,"../services/",dirPath)+'.zip',function(err,res){
 		if(err){
 			callback(err,null)
 		}else{
@@ -60,7 +60,7 @@ function createArtifact(xcoreFile,propertiesObject,callback){
 			console.log(err); //Maybe do something else there (throw ?)
 		}else{
 			//return the artifact
-			callback(res)//the .zip file
+			callback(err,res)//the .zip file
 		}
 	})
 	
