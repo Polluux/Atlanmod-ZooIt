@@ -35,13 +35,13 @@ function zipArchitecture(dirPath, callback){
 	})
 }
 
-function createArtifact(xcoreFile,propertiesObject,callback){
-	//create tmp folder with propertiesObject.artifactName
-	createFolder("./"+propertiesObject.artifactName)
+function createArtifact(propertiesObject,callback){
+	//create tmp folder with propertiesObject.artefact_name
+	createFolder("./"+propertiesObject.artefact_name)
 
 	/*create artchitecture such as :
-		|-{propertiesObject.artifactName}
-			|-{xcoreFile.name}
+		|-{propertiesObject.artefact_name}
+			|-{propertiesObject.xcoreFilePath} //Why ? idk.
 				|-src
 					|-main
 						|-model
@@ -49,13 +49,17 @@ function createArtifact(xcoreFile,propertiesObject,callback){
 				|-pom.xml
 			|-pom.xml
 	*/
-	//The first artifactName is the temporary file wich is about to be zipped
-	createArchitecture("./"+propertiesObject.artifactName+"/"+propertiesObject.artifactName,xcoreFile.name)
+	//The first artefact_name is the temporary file wich is about to be zipped
+	createArchitecture("./"+propertiesObject.artefact_name+"/"+propertiesObject.artefact_name,propertiesObject.file.split('#')[1])
 
-	//edit content of both pom.xml with informations in propertiesObject
+	//Copy the xcore file from the tmp directory to services
+	//Ask Roxane about the #, her idea
+	var ouch = propertiesObject.artefact_name+"/"+propertiesObject.artefact_name+"/"+propertiesObject.file.split('#')[1]+"/src/main/model/"
+	fs.createReadStream(propertiesObject.file.split('#')[0]).pipe(fs.createWriteStream(path.join(__dirname,"../services/",ouch+propertiesObject.file.split('#')[1])));
+
 
 	//zip the artifact
-	zipArchitecture("./"+propertiesObject.artifactName, function(err,res){
+	zipArchitecture("./"+propertiesObject.artefact_name, function(err,res){
 		if(err){
 			console.log(err); //Maybe do something else there (throw ?)
 		}else{
@@ -67,13 +71,5 @@ function createArtifact(xcoreFile,propertiesObject,callback){
 
 	//Execute maven + send to maven repo ???
 }
-
-
-//Some tests
-/*var file = {name: "myXcoreFile"}
-var properties = {artifactName: "myArtifact"}
-createArtifact(file,properties,function(zipFile){
-	console.log("Zip file created : "+zipFile)
-})*/
 
 module.exports = { createArtifact }

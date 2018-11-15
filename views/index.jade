@@ -9,7 +9,7 @@ block content
   .block
     form#form(action="/", method="post")
       div.form_half
-        input#file_input(type="file", name="file")
+        input#file_input(type="file", name="file").filepond
       div#form_fields.form_half
         label.field
           // div.field_name nom
@@ -27,3 +27,6 @@ block content
   script.
     const inputElement = document.getElementById('file_input');
     const pond = FilePond.create( inputElement );
+    FilePond.setOptions({
+        server: '/file'
+    });
