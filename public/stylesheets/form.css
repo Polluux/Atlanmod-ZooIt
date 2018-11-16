@@ -72,6 +72,7 @@ input[type="text"]{
 }
 
 input[type="text"]:invalid{
+	box-shadow: none;
     border-bottom-color: var(--error);
 }
 
