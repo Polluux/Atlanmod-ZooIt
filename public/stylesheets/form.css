@@ -1,14 +1,18 @@
 #form{
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
 }
 
 .form_half{
 	width: 49%;
+	align-self: center;
+}
+
+#section-maven{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: baseline;
 }
 
 #form_fields{
@@ -66,16 +70,16 @@ input, textarea{
 	padding: 3px 0;
 }
 
-input[type="text"]{
+input[type="text"], input[type="url"]{
 	border-bottom: 1px solid var(--dark-gray);
 	transition: border ease 0.2s;
 }
 
-input[type="text"]:invalid{
+input[type="text"]:invalid, input[type="url"]:invalid{
 	box-shadow: none;
     border-bottom-color: var(--error);
 }
 
-input[type="text"]:valid{
+input[type="text"]:valid, input[type="url"]:valid{
     border-bottom-color: var(--highlight);
 }

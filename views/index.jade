@@ -8,37 +8,47 @@ block content
 
   .block
     form#form(action="/", method="post")
-      div.form_half
-        input#file_input(type="file", name="file", required).filepond
-      div#form_fields.form_half
-        label.field
-          // div.field_name nom
-          input(type="text", name="artifactName").field_field
-          div.field_description * Nom de l'artefact à générer
+      div.section.cutinhalf#section-required
+        div.form_half
+          input#file_input(type="file", name="file", required).filepond
+        div#form_fields.form_half
+          label.field
+            input(type="text", name="artifactID").field_field
+            div.field_description * ID de l'artefact
 
-        label.field
-          input(type="text", name="artifactID").field_field
-          div.field_description * ID de l'artefact
+          label.field
+            input(type="text", name="groupID", required).field_field
+            div.field_description * Groupe de l'artefact (Ex : com.company.project)
 
-        label.field
-          input(type="text", name="groupID", required).field_field
-          div.field_description * Groupe de l'artefact (Ex : com.company.project)
+          label.field
+            input(type="text", name="version").field_field
+            div.field_description * Version de l'artefact (Ex : 1.0.0)
 
-        label.field
-          input(type="text", name="version").field_field.mvn_required
-          div.field_description * Version de l'artefact (Ex : 1.0.0)
+          label.field
+            input#checkbox_maven_toggler(type="checkbox", name="mavencentral").field_field
+            div.field_description Déployer sur Maven central 
 
-        label.field
-          // div.field_name description
-          input(type="text", name="artefact_description").field_field
-          div.field_description Description de l'artefact
+      div.section#section-maven
 
-        label.field
-          input#checkbox_maven_toggler(type="checkbox", name="mavencentral").field_field
-          div.field_description Déployer sur Maven central 
+          label.field
+            input(type="text", name="artifactName").field_field.mvn_required
+            div.field_description * Nom de l'artefact à générer
 
-        * Champs obligatoires
+          label.field
+            input(type="text", name="artefact_description").field_field.mvn_required
+            div.field_description Description de l'artefact
 
+          label.field
+            input(type="url", name="artifactURL").field_field.mvn_required
+            div.field_description URL du projet
+
+          // developpers
+          // scm
+
+      div.section#section-optionnel
+
+
+      div.section#section-submit
         input(type="submit", name="submit")#submit_button
 
   script(type="text/javascript", src="/libs/filepond/filepond.min.js")
