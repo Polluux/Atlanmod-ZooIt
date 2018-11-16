@@ -2,6 +2,7 @@
   --light-gray: #EEE;
   --dark-gray: #6C6C6C;
   --highlight: #6497CC;
+  --error: red;
 }
 
 html{
