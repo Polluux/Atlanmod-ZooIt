@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const zipFolder = require('zip-folder')
+const spawn = require('child_process');
 
 
 function createFolder(dirPath){
@@ -11,17 +12,33 @@ function createFolder(dirPath){
 	}
 }
 
-function createArchitecture(artifactMainFolder,xcoreFileName){
-	createFolder(artifactMainFolder)
-	createFolder(artifactMainFolder+"/"+xcoreFileName)
-	createFolder(artifactMainFolder+"/"+xcoreFileName+"/src")
-	createFolder(artifactMainFolder+"/"+xcoreFileName+"/src/main")
-	createFolder(artifactMainFolder+"/"+xcoreFileName+"/src/main/model")
+function generateMavenArtifact(artifactID, groupID, version){	
+	// Generate the Maven artifact with the 
+	try{			
+		var cd = spawn.spawn('cd', [artifactID]);
+		var yes = spawn.spawn('yes');
+		var mvn = spawn.spawn('mvn', ["archetype:generate", "-DarchetypeCatalog=local", "-DarchetypeGroupId=com.atlanmod.zoo", "-DarchetypeArtifactId=xcore-generation-archetype", "-DarchetypeVersion=1.0", "-DgroupId="+groupID, "-DartifactId="+artifactID, "-Dversion="+version]);
+
+		yes.stdout.pipe(mvn.stdin);	
+
+		cd.on('error', function(err) {
+			console.log(err);
+		});
+
+		yes.on('error', function(err) {
+			console.log(err);
+		});
+
+		mvn.on('error', function(err) {
+			console.log(err);
+		});
+	}
+	catch (err){
+		throw err;
+	}
+
 }
 
-function createFile(){
-	//Not implemented Yet
-}
 
 function zipArchitecture(dirPath, callback){
 	zipFolder(path.join(__dirname,"../services/",dirPath),path.join(__dirname,"../services/",dirPath)+'.zip',function(err,res){
@@ -37,29 +54,18 @@ function zipArchitecture(dirPath, callback){
 
 function createArtifact(propertiesObject,callback){
 	//create tmp folder with propertiesObject.artefact_name
-	createFolder("./"+propertiesObject.artefact_name)
+	createFolder("./"+propertiesObject.artifactID)
+	generateMavenArtifact(propertiesObject.artifactID, propertiesObject.groupID, propertiesObject.version);
 
-	/*create artchitecture such as :
-		|-{propertiesObject.artefact_name}
-			|-{propertiesObject.xcoreFilePath} //Why ? idk.
-				|-src
-					|-main
-						|-model
-							|-file.xcore
-				|-pom.xml
-			|-pom.xml
-	*/
-	//The first artefact_name is the temporary file wich is about to be zipped
-	createArchitecture("./"+propertiesObject.artefact_name+"/"+propertiesObject.artefact_name,propertiesObject.file.split('#')[1])
-
+	
 	//Copy the xcore file from the tmp directory to services
 	//Ask Roxane about the #, her idea
-	var ouch = propertiesObject.artefact_name+"/"+propertiesObject.artefact_name+"/"+propertiesObject.file.split('#')[1]+"/src/main/model/"
+	var ouch = propertiesObject.artifactID+"/"+propertiesObject.artefact_name+"/src/main/model/"
 	fs.createReadStream(propertiesObject.file.split('#')[0]).pipe(fs.createWriteStream(path.join(__dirname,"../services/",ouch+propertiesObject.file.split('#')[1])));
 
 
 	//zip the artifact
-	zipArchitecture("./"+propertiesObject.artefact_name, function(err,res){
+	zipArchitecture("./"+propertiesObject.artifactID, function(err,res){
 		if(err){
 			console.log(err); //Maybe do something else there (throw ?)
 		}else{
@@ -71,5 +77,6 @@ function createArtifact(propertiesObject,callback){
 
 	//Execute maven + send to maven repo ???
 }
+
 
 module.exports = { createArtifact }
