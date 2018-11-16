@@ -66,3 +66,6 @@ services/*
 
 # The package-lock.son
 package-lock.json
+
+# The maven archetype
+maven_archetype/target
