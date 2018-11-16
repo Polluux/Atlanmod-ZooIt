@@ -13,13 +13,27 @@ block content
       div#form_fields.form_half
         label.field
           // div.field_name nom
-          input(type="text", name="artefact_name").field_field
-          div.field_description nom de l'artefact à générer
+          input(type="text", name="artifactName").field_field
+          div.field_description * Nom de l'artefact à générer
+
+        label.field
+          input(type="text", name="artifactID").field_field
+          div.field_description * ID de l'artefact
+
+        label.field
+          input(type="text", name="groupeID").field_field
+          div.field_description * Groupe de l'artefact (Ex : com.company.project)
+
+        label.field
+          input(type="text", name="version").field_field
+          div.field_description * Version de l'artefact (Ex : 1.0.0)
 
         label.field
           // div.field_name description
           input(type="text", name="artefact_description").field_field
-          div.field_description description de l'artefact
+          div.field_description Description de l'artefact
+
+        * Champs obligatoires
 
         input(type="submit", name="submit")#submit_button
 
