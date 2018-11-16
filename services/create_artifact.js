@@ -30,7 +30,7 @@ function generateMavenArtifact(artifactID, groupID, version, callback){
 		const execSync = require('child_process').execSync;
 
 		execSync(command, {cwd: path.join(__dirname,"../services/",artifactID)}, (e, stdout, stderr)=> {
-			if (e instanceof Error) {		
+			if (e instanceof Error) {	
 				console.error(e);	
 			}		
 			console.log('stdout ', stdout);		
