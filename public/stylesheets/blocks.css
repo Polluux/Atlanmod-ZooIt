@@ -28,3 +28,7 @@
     justify-content: space-between;
     align-items: flex-start;
 }
+
+.section:nth-child(-n+2){
+    border-bottom: 1px solid var(--light-gray);
+}

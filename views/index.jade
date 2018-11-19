@@ -10,42 +10,60 @@ block content
     form#form(action="/", method="post")
       div.section.cutinhalf#section-required
         div.form_half
+          h3 Votre fichier XCore
           input#file_input(type="file", name="file", required).filepond
         div#form_fields.form_half
-          label.field
-            input(type="text", name="artifactID").field_field
-            div.field_description * ID de l'artefact
+          h3 Champs obligatoires
 
           label.field
-            input(type="text", name="groupID", required).field_field
-            div.field_description * Groupe de l'artefact (Ex : com.company.project)
+            input(type="text", name="artifactID", required, pattern="[A-Za-z0-9.-]+").field_field
+            div.field_description ID de l'artefact
 
           label.field
-            input(type="text", name="version").field_field
-            div.field_description * Version de l'artefact (Ex : 1.0.0)
+            input(type="text", name="groupID", required, pattern="[A-Za-z0-9.-]+").field_field
+            div.field_description Groupe de l'artefact (Ex : com.company.project)
+
+          label.field
+            input(type="text", name="version", required, pattern="[A-Za-z0-9.-]+").field_field
+            div.field_description Version de l'artefact (Ex : 1.0.0)
 
           label.field
             input#checkbox_maven_toggler(type="checkbox", name="mavencentral").field_field
-            div.field_description Déployer sur Maven central 
+            div.field_description(style="display: inline") Déployer sur Maven central 
 
       div.section#section-maven
 
-          label.field
-            input(type="text", name="artifactName").field_field.mvn_required
-            div.field_description * Nom de l'artefact à générer
+          h3 Champs nécessaires pour déployer sur le Central
 
-          label.field
-            input(type="text", name="artefact_description").field_field.mvn_required
-            div.field_description Description de l'artefact
+          div.content
+            label.field
+              input(type="text", name="artifactName").field_field.mvn_required
+              div.field_description Nom de l'artefact à générer
 
-          label.field
-            input(type="url", name="artifactURL").field_field.mvn_required
-            div.field_description URL du projet
+            label.field
+              input(type="text", name="artefact_description").field_field.mvn_required
+              div.field_description Description de l'artefact
+
+            label.field
+              input(type="url", name="artifactURL").field_field.mvn_required
+              div.field_description URL du projet
 
           // developpers
           // scm
 
-      div.section#section-optionnel
+      div.section#section-optionnal
+
+          h3 Champs optionnels
+
+          div.content
+
+            label.field
+              input(type="text", name="organisation").field_field
+              div.field_description Organisation 
+
+            label.field
+              input(type="text", name="year", pattern="[0-9]{4}").field_field
+              div.field_description Année de création
 
 
       div.section#section-submit
@@ -57,5 +75,5 @@ block content
     const inputElement = document.getElementById('file_input');
     const pond = FilePond.create( inputElement );
     FilePond.setOptions({
-        server: '/file'
+        server: '/file',
     });

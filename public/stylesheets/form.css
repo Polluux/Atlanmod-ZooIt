@@ -4,10 +4,9 @@
 
 .form_half{
 	width: 49%;
-	align-self: center;
 }
 
-#section-maven{
+#section-maven .content, #section-optionnal .content{
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -22,6 +21,10 @@
 	flex-wrap: nowrap;
 	justify-content: flex-start;
 	align-items: flex-start;
+
+	padding-left: 2em;
+	box-sizing: border-box;
+	border-left: 1px solid var(--light-gray);
 }
 
 .field{
