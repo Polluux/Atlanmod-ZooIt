@@ -107,5 +107,5 @@ textarea:valid, input[type="text"]:valid, input[type="url"]:valid{
 
 textarea{
 	font: 12px "Quicksand", Helvetica, Arial, sans-serif;
-	height: 12em;
+	height: 14em;
 }
