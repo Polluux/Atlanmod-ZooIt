@@ -11,7 +11,7 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	align-items: baseline;
+	align-items: flex-end;
 }
 
 #form_fields{
@@ -30,6 +30,22 @@
 .field{
 	display: block;
 	margin-bottom: 1em;
+}
+
+#form_fields .field{
+	width: 100%;
+}
+
+#checkbox_maven_toggler{
+	width: initial;
+}
+
+.content .field{
+	width: 30%;
+}
+
+.content .field.large{
+	width: 40%;
 }
 
 .field_name{
@@ -71,18 +87,25 @@
 input, textarea{
 	border: 0;
 	padding: 3px 0;
+	width: 100%;
 }
 
-input[type="text"], input[type="url"]{
+textarea, input[type="text"], input[type="url"]{
 	border-bottom: 1px solid var(--dark-gray);
 	transition: border ease 0.2s;
 }
 
-input[type="text"]:invalid, input[type="url"]:invalid{
+textarea:invalid, input[type="text"]:invalid, input[type="url"]:invalid{
 	box-shadow: none;
     border-bottom-color: var(--error);
 }
 
-input[type="text"]:valid, input[type="url"]:valid{
+textarea:valid, input[type="text"]:valid, input[type="url"]:valid{
     border-bottom-color: var(--highlight);
+}
+
+
+textarea{
+	font: 12px "Quicksand", Helvetica, Arial, sans-serif;
+	height: 12em;
 }

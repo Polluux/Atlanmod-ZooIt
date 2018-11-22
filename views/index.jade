@@ -34,6 +34,7 @@ block content
       div.section#section-maven
 
           h3 Champs nécessaires pour déployer sur le Central
+          p Pour plus de détails, voir #[a(href="https://central.sonatype.org/pages/requirements.html", target="_blank") la documentation].
 
           div.content
             label.field
@@ -48,8 +49,13 @@ block content
               input(type="url", name="artifactURL").field_field.mvn_required
               div.field_description URL du projet
 
-          // developpers
-          // scm
+            label.field.large
+              textarea#textarea_developpers(name="developpers", spellcheck="false").field_field.mvn_required
+              div.field_description developpeurs 
+
+            label.field.large
+              textarea#textarea_scm(name="scm", spellcheck="false").field_field.mvn_required
+              div.field_description versionnement
 
       div.section#section-optionnal
 
@@ -57,11 +63,11 @@ block content
 
           div.content
 
-            label.field
-              input(type="text", name="organisation").field_field
+            label.field.large
+              input(type="text", name="organization").field_field
               div.field_description Organisation 
 
-            label.field
+            label.field.large
               input(type="text", name="year", pattern="[0-9]{4}").field_field
               div.field_description Année de création
 
@@ -70,7 +76,7 @@ block content
         input(type="submit", name="submit")#submit_button
 
   script(type="text/javascript", src="/libs/filepond/filepond.min.js")
-  script(type="text/javascript", src="/scripts/toggleRequired.js")
+  script(type="text/javascript", src="/scripts/form.js")
   script.
     const inputElement = document.getElementById('file_input');
     const pond = FilePond.create( inputElement );
