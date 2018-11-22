@@ -105,13 +105,13 @@ function createArtifact(propertiesObject,callback){
 
 								    	//Adding the facultatives properties specified in the form
 								    	if(propertiesObject.artifactName) xmlParseResult.project.name = propertiesObject.artifactName
-								    	if(propertiesObject.artefact_description) xmlParseResult.project.description = propertiesObject.artefact_description
+								    	if(propertiesObject.artifactDescription) xmlParseResult.project.description = propertiesObject.artifactDescription
 								    	if(propertiesObject.artifactURL) xmlParseResult.project.url = propertiesObject.artifactURL
 								    	if(propertiesObject.year) xmlParseResult.project.inceptionYear = propertiesObject.year
 								    	if(propertiesObject.organization) xmlParseResult.project.organization = { name: propertiesObject.organization }
 								    	var parseError = ""
-								    	if(propertiesObject.developpers){
-								    		xml2js.parseString(propertiesObject.developpers, function(devParseError,devParseResult){
+								    	if(propertiesObject.developers){
+								    		xml2js.parseString(propertiesObject.developers, function(devParseError,devParseResult){
 									    		if(devParseError){
 									    			parseError += "An error occured during parse of developers field :\n"+devParseError+"\n"
 									    		}else{
@@ -133,7 +133,7 @@ function createArtifact(propertiesObject,callback){
 								    	if(parseError !== ""){
 								    		callback(parseError,null)
 								    	}else{
-								    		
+
 								    		//Rebuild the xml file
 									    	var builder = new xml2js.Builder()
 									    	var xml = builder.buildObject(xmlParseResult)
