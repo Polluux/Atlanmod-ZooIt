@@ -73,7 +73,9 @@ block content
 
 
       div.section#section-submit
-        input(type="submit", name="submit")#submit_button
+        div#submit_button
+          span Envoyer
+          img(src="/img/spinner.png")
 
   script(type="text/javascript", src="/libs/filepond/filepond.min.js")
   script(type="text/javascript", src="/scripts/form.js")
@@ -83,3 +85,4 @@ block content
     FilePond.setOptions({
         server: '/file',
     });
+  script(type="text/javascript", src="/scripts/submit.js")
