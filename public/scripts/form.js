@@ -19,8 +19,17 @@ function toggleRequired(event) {
 
 developpers = "<developers>\n<developer>\n  <name> ... </name>\n  <email> ... </email>\n  <organization> ... </organization>\n  <organizationUrl> ... </organizationUrl>\n</developer>\n</developers>"
 scm = "<scm>\n<connection>\n  scm:git:git://github.com/ ...\n</connection>\n<developerConnection>\n  scm:git:ssh://github.com: ...\n</developerConnection>\n<url>\n  http://github.com/ ...\n</url>\n</scm>"
-textarea_developpers.value=developpers;
-textarea_scm.value=scm;
+textarea_developpers.placeholder=developpers;
+textarea_scm.placeholder=scm;
+
+function fill_textarea(textarea, text){
+	if (textarea.value==""){
+		textarea.value = text
+	}
+}
+
+textarea_developpers.addEventListener("click", function(){fill_textarea(textarea_developpers, developpers)});
+textarea_scm.addEventListener("click", function(){fill_textarea(textarea_scm, scm)});
 
 // validate textarea
 
@@ -28,6 +37,11 @@ textarea_developpers.addEventListener("keyup", validate_developers);
 textarea_scm.addEventListener("keyup", validate_scm);
 
 function validate_developers(){
+	if (textarea_developpers.value=="" && !textarea_developpers.required){
+		textarea_developpers.setCustomValidity("");
+		return true
+	}
+
 	var devParser = new DOMParser();
 	var devDOM = devParser.parseFromString(textarea_developpers.value, "application/xml");
 
@@ -63,6 +77,11 @@ function validate_developers(){
 }
 
 function validate_scm(){
+	if (textarea_scm.value=="" && !textarea_scm.required){
+		textarea_scm.setCustomValidity("")
+		return true
+	}
+
 	textarea_scm.setCustomValidity("")
 	var scmParser = new DOMParser();
 	var scmDOM = scmParser.parseFromString(textarea_scm.value, "application/xml");
@@ -104,7 +123,6 @@ function validate_scm(){
 		textarea_scm.setCustomValidity("<url> malformée, doit commencer par http");
 		return false
 	}
-	
 	return true;
 }
 
