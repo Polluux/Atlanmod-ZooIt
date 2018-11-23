@@ -63,6 +63,8 @@ typings/
 # Generated zip files in service
 services/*
 !services/create_artifact.js
+!services/zoo-request.js
+!services/prompt_script.js
 
 # The package-lock.son
 package-lock.json
