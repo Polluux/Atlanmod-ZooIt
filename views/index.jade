@@ -27,9 +27,10 @@ block content
             input(type="text", name="version", required, pattern="[A-Za-z0-9.-]+").field_field
             div.field_description Version de l'artefact (Ex : 1.0.0)
 
-          label.field
-            input#checkbox_maven_toggler(type="checkbox", name="mavencentral").field_field
-            div.field_description(style="display: inline") Déployer sur Maven central 
+          // For now, we do not deploy on Maven Central
+          //label.field
+          //  input#checkbox_maven_toggler(type="checkbox", name="mavencentral").field_field
+          //  div.field_description(style="display: inline") Déployer sur Maven central 
 
       div.section#section-maven
 

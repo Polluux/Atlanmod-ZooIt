@@ -1,19 +1,21 @@
-maven_required_fields = document.getElementsByClassName('mvn_required');
-textarea_developpers = document.getElementById('textarea_developpers');
-textarea_scm = document.getElementById('textarea_scm');
+// For now, we do not deploy on Maven Central
 
-// Toggle maven required
+// maven_required_fields = document.getElementsByClassName('mvn_required');
+// textarea_developpers = document.getElementById('textarea_developpers');
+// textarea_scm = document.getElementById('textarea_scm');
 
-document.addEventListener('DOMContentLoaded',function() {
-    document.getElementById('checkbox_maven_toggler').onchange=toggleRequired;
-},false);
+// // Toggle maven required
+
+// document.addEventListener('DOMContentLoaded',function() {
+//     document.getElementById('checkbox_maven_toggler').onchange=toggleRequired;
+// },false);
 
 
-function toggleRequired(event) {
-    for (field of maven_required_fields){
-    	field.required = this.checked;
-    }
-}
+// function toggleRequired(event) {
+//     for (field of maven_required_fields){
+//     	field.required = this.checked;
+//     }
+// }
 
 // add default values
 
