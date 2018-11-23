@@ -15,13 +15,14 @@ function requestNewArtifact(token, artifactID, xcoreFile, callback){
               'User-Agent': 'request'
             }
           };
-    
+
+            
         request(options, (err, res, body) => {
             if (err) { return console.log(err); }
     
             var forkExists = false;
             var forkName = null;
-        
+
             JSON.parse(body).forEach(function(element){
                 if(element.owner.login==username){
                     forkExists = true;
@@ -34,12 +35,17 @@ function requestNewArtifact(token, artifactID, xcoreFile, callback){
                 request.post(options, (err, res, body) => {
                     if (err) { return console.log(err); }
                     forkName = JSON.parse(body).source.name;
-                    commitPushPullRequest(username, forkName,token, artifactID, xcoreFile);
+                    makeNewBranch(token, artifactID, forkName, username, function(branchName){                        
+                        commitPushPullRequest(username, forkName,token, artifactID, xcoreFile, branchName);
+
+                    });
                 });
 
             }
             else{
-                commitPushPullRequest(username, forkName,token, artifactID, xcoreFile);
+                makeNewBranch(token, artifactID, forkName, username, function(branchName){ 
+                    commitPushPullRequest(username, forkName,token, artifactID, xcoreFile, branchName);
+                });
             } 
         });       
     
@@ -62,16 +68,16 @@ function getUser(token, callback){
     });
 }
 
-function commitPushPullRequest(username, forkName, token, artifactID, xcoreFile){
+function commitPushPullRequest(username, forkName, token, artifactID, xcoreFile, branchName){
     gitCommitPush({
         owner: username,
         repo: forkName,
         token : token.access_token,
+        fullyQualifiedRef : "heads/"+branchName,
         files: [
             { path: artifactID+"/pom.xml", content: fs.readFileSync(__dirname + "/"+artifactID+"/"+artifactID+"/pom.xml", "utf-8") },
             { path: artifactID+"/src/main/model/"+xcoreFile, content: fs.readFileSync(__dirname + "/"+artifactID+"/"+artifactID+"/src/main/model/"+xcoreFile, "utf-8") }
-            ],
-        fullyQualifiedRef: "heads/master",
+            ],        
         forceUpdate: false, // optional default = false
         commitMessage: "Added a new xcore model artifact in the zoo : "+artifactID
         }).then(res => {
@@ -84,7 +90,7 @@ function commitPushPullRequest(username, forkName, token, artifactID, xcoreFile)
                 json: {
                     "title": "New xcore model artifact : "+artifactID,
                     "body": "Auto-generated from Moulinette",
-                    "head": username+":master",
+                    "head": username+":"+branchName,
                     "base": "master"
                   }
               };
@@ -96,6 +102,51 @@ function commitPushPullRequest(username, forkName, token, artifactID, xcoreFile)
         }).catch(err => {
             console.error(err);
         });
+}
+
+
+function makeNewBranch(token, artifactID, forkName, username, callback){
+    
+    var options = {
+        url: API_URL+'/repos/'+ZOO_REPO+'/git/refs/heads?access_token='+token.access_token,
+        headers: {
+          'User-Agent': 'request'
+        }
+      };
+
+    request(options, (err, res, body) => {
+        if (err) { return console.log(err); }
+        
+        var branchSha = null;
+        
+        JSON.parse(body).forEach(function(element){
+            if(element.ref=="refs/heads/master"){                
+                branchSha = element.object.sha;                
+            }                
+        });
+
+        var branchName = "zoo-"+artifactID+"-artifact";
+
+        var options = {
+            url: API_URL+'/repos/'+username+'/'+forkName+'/git/refs?access_token='+token.access_token,
+            headers: {
+              'User-Agent': 'request'
+            },
+            json: {
+                "ref" : "refs/heads/"+branchName,
+                "sha": branchSha            
+              }
+          };
+
+        request.post(options, (err, res, body) => {
+            if (err) { return console.log(err); }  
+            callback(branchName);
+        });
+        
+        
+    });
+
+    
 }
 
 module.exports = {requestNewArtifact}
