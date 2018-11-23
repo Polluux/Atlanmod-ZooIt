@@ -71,3 +71,4 @@ package-lock.json
 
 # The maven archetype
 maven_archetype/target
+maven_archetype_zoo/target

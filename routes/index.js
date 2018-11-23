@@ -23,7 +23,9 @@ router.post('/file', function(req, res, next){
 
 router.post('/', function(req, res, next){
 
-	artifactService.createArtifact(req.body,function(error,result){
+	var archetype = "xcore-generation-archetype"
+
+	artifactService.createArtifact(req.body, archetype, true, function(error,result){
 		if(error){
 			res.send('Error :\n'+error)
 		}else{
@@ -61,8 +63,17 @@ githubOAuth.on('token', function(token, serverResponse) {
 	// TODO : make artifactID and filename great again
 	var artifactID = "kraken"
 	var fileName = "Kraken.xcore"
-	
-	zooRequest.requestNewArtifact(token, artifactID, fileName ,function(){});		
+
+	var archetype = "xcore-generation-archetype-zoo"
+
+	artifactService.createArtifact(serverResponse.body, archetype, false, function(error,result){
+		if(error){
+			serverResponse.send('Error :\n'+error)
+		}else{
+			zooRequest.requestNewArtifact(token, artifactID, fileName ,function(){});
+		}
+	});
+			
 	serverResponse.render('zoo-request');	
 })
 

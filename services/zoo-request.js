@@ -1,55 +1,61 @@
 const fs = require("fs");
 const {gitCommitPush} = require("git-commit-push-via-github-api");
 const request = require('request');
+const path = require('path')
+const xml2js = require('xml2js')
 
 const API_URL = 'https://api.github.com';
 const ZOO_REPO = "Polluux/capstoneatlanmodzoosandbox";
 
 
-function requestNewArtifact(token, artifactID, xcoreFile, callback){    
-
-    getUser(token, function(username){
-        var options = {
-            url: API_URL+'/repos/'+ZOO_REPO+'/forks?access_token='+token.access_token,
-            headers: {
-              'User-Agent': 'request'
-            }
-          };
-
-            
-        request(options, (err, res, body) => {
-            if (err) { return console.log(err); }
+function requestNewArtifact(token, artifactID, xcoreFile, callback){  
     
-            var forkExists = false;
-            var forkName = null;
+    getPomFromZoo(artifactID, function(){    
 
-            JSON.parse(body).forEach(function(element){
-                if(element.owner.login==username){
-                    forkExists = true;
-                    forkName = element.name;
-                }                
-            });
+        getUser(token, function(username){
+            var options = {
+                url: API_URL+'/repos/'+ZOO_REPO+'/forks?access_token='+token.access_token,
+                headers: {
+                    'User-Agent': 'request'
+                }
+                };
 
-            if(!forkExists){                
-            
-                request.post(options, (err, res, body) => {
-                    if (err) { return console.log(err); }
-                    forkName = JSON.parse(body).source.name;
-                    makeNewBranch(token, artifactID, forkName, username, function(branchName){                        
-                        commitPushPullRequest(username, forkName,token, artifactID, xcoreFile, branchName);
+                
+            request(options, (err, res, body) => {
+                if (err) { return console.log(err); }
 
+                var forkExists = false;
+                var forkName = null;
+
+                JSON.parse(body).forEach(function(element){
+                    if(element.owner.login==username){
+                        forkExists = true;
+                        forkName = element.name;
+                    }                
+                });
+
+                if(!forkExists){                
+                
+                    request.post(options, (err, res, body) => {
+                        if (err) { return console.log(err); }
+                        forkName = JSON.parse(body).source.name;
+                        makeNewBranch(token, artifactID, forkName, username, function(branchName){                        
+                            commitPushPullRequest(username, forkName,token, artifactID, xcoreFile, branchName);
+
+                        });
                     });
-                });
 
-            }
-            else{
-                makeNewBranch(token, artifactID, forkName, username, function(branchName){ 
-                    commitPushPullRequest(username, forkName,token, artifactID, xcoreFile, branchName);
-                });
-            } 
-        });       
-    
-        callback(null);
+                }
+                else{
+                    makeNewBranch(token, artifactID, forkName, username, function(branchName){ 
+                        commitPushPullRequest(username, forkName,token, artifactID, xcoreFile, branchName);
+                    });
+                } 
+            });       
+
+            callback(null);
+        });
+
     });
     
 }
@@ -76,6 +82,7 @@ function commitPushPullRequest(username, forkName, token, artifactID, xcoreFile,
         fullyQualifiedRef : "heads/"+branchName,
         files: [
             { path: artifactID+"/pom.xml", content: fs.readFileSync(__dirname + "/"+artifactID+"/"+artifactID+"/pom.xml", "utf-8") },
+            { path: "pom.xml", content: fs.readFileSync(__dirname + "/"+artifactID+"/pom.xml", "utf-8") },
             { path: artifactID+"/src/main/model/"+xcoreFile, content: fs.readFileSync(__dirname + "/"+artifactID+"/"+artifactID+"/src/main/model/"+xcoreFile, "utf-8") }
             ],        
         forceUpdate: false, // optional default = false
@@ -141,12 +148,42 @@ function makeNewBranch(token, artifactID, forkName, username, callback){
         request.post(options, (err, res, body) => {
             if (err) { return console.log(err); }  
             callback(branchName);
-        });
-        
-        
-    });
+        });               
+    });   
+}
 
-    
+function getPomFromZoo(artifactID, callback){
+
+    var options = {
+        url: API_URL+'/repos/'+ZOO_REPO+'/contents/pom.xml',
+        headers: {
+          'User-Agent': 'request'
+        },
+        json: {
+            "ref" : "refs/heads/master/",            
+          }
+      };
+
+    request.get(options, (err, res, body) => {
+        if (err) { return console.log(err); }  
+
+        var pomPath = path.join(__dirname,artifactID+"/pom.xml");
+        var pomSplit = Buffer.from(body.content, 'base64').toString("utf-8").split("\n")       
+
+        var modulesArrayIndex = pomSplit.findIndex(function(element) {
+            return element == '    </modules>';
+        });
+
+        pomSplit.splice(modulesArrayIndex, 0, "        <module>"+artifactID+"</module>");
+        var text = pomSplit.join("\n");
+
+        fs.writeFile(pomPath, text, function (err) {
+            if (err) return console.log(err);
+        });
+ 
+        callback();
+    });               
+
 }
 
 module.exports = {requestNewArtifact}

@@ -23,7 +23,7 @@ function createFolder(dirPath,callback){
 	}
 }
 
-function generateMavenArtifact(artifactID, groupID, version, callback){	
+function generateMavenArtifact(artifactID, groupID, version, archetype, callback){	
 	// Generate the Maven artifact with the 
 
 	if (!whitelist_regex.test(artifactID))
@@ -34,7 +34,7 @@ function generateMavenArtifact(artifactID, groupID, version, callback){
 		callback("Error : version is invalid");
 	else{
 
-		var command = "yes |mvn archetype:generate -DarchetypeCatalog=local -DarchetypeGroupId=com.atlanmod.zoo -DarchetypeArtifactId=xcore-generation-archetype -DarchetypeVersion=1.0 -DgroupId="+groupID+" -DartifactId="+artifactID+" -Dversion="+version;
+		var command = "yes |mvn archetype:generate -DarchetypeCatalog=local -DarchetypeGroupId=com.atlanmod.zoo -DarchetypeArtifactId="+archetype+" -DarchetypeVersion=1.0 -DgroupId="+groupID+" -DartifactId="+artifactID+" -Dversion="+version;
 		
 		const execSync = require('child_process').execSync;
 		execSync(command, {cwd: path.join(__dirname,artifactID)}, (e, stdout, stderr)=> {
@@ -64,9 +64,7 @@ function zipArchitecture(dirPath, callback){
 	})
 }
 
-function createArtifact(propertiesObject,callback){
-	console.log(propertiesObject)
-
+function createArtifact(propertiesObject, archetype, zip, callback){
 	//Check validity of the artifactID, to prevent a name such as "../artifact" which would cause issues
 	if(!whitelist_regex.test(propertiesObject.artifactID)){
 		callback("Error, you tried interring an unauthorized character...",null)
@@ -78,8 +76,10 @@ function createArtifact(propertiesObject,callback){
 				callback(errFolder,null)
 			}else{
 
+				var archetype = "xcore-generation-archetype"
+
 				//Generate the maven artifact (architecture + pom.xml)
-				generateMavenArtifact(propertiesObject.artifactID, propertiesObject.groupID, propertiesObject.version, function(err){			
+				generateMavenArtifact(propertiesObject.artifactID, propertiesObject.groupID, propertiesObject.version, archetype, function(err){			
 					if(err){
 						callback(err,null)
 					}else{
@@ -144,15 +144,19 @@ function createArtifact(propertiesObject,callback){
 								            		callback(writeFileError,null)
 								            	}else{
 
-								            		//Zip the artifact
-													zipArchitecture("./"+propertiesObject.artifactID, function(zipError,zipResult){
-														if(zipError){
-															console.log(zipError,null);
-														}else{
-															//return the artifact
-															callback(null,zipResult)//the .zip file
-														}
-													})
+													if(zip){
+														//Zip the artifact
+														zipArchitecture("./"+propertiesObject.artifactID, function(zipError,zipResult){
+															if(zipError){
+																console.log(zipError,null);
+															}else{
+																//return the artifact
+																callback(null,zipResult)//the .zip file
+															}
+														})
+													} else {
+														callback(null,null)
+													}
 													
 
 													//Execute maven + send to maven repo ???

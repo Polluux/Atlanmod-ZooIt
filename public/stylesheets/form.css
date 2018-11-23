@@ -62,8 +62,9 @@
 
 }
 
-#submit_button{
+.submit_button{
 	position: relative;
+	box-sizing: border-box;
 
 	display: flex;
 	flex-wrap: nowrap;
@@ -78,7 +79,7 @@
 	
 	background-color: var(--highlight);
 	color: #FFF;
-	cursor: pointer;
+	cursor: pointer!important;
 
 	box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 	transition: box-shadow ease-in-out 0.3s;
@@ -87,17 +88,18 @@
 	font: 14px "Oxygen", Helvetica, Arial, sans-serif;
 }
 
-#submit_button img{
+.submit_button img{
 	height: 2em;
 	width: 2em;
 	filter: invert(100%);
 	position: absolute;
-	top: 0.9em; /* (3-2) / 2 */
 	margin-left: 1000px;
 	transition: all ease-in-out 0.3s;
 	animation: roll 2s infinite;
 	animation-timing-function: cubic-bezier(.6,-0.25,.61,1.33);
-
+}
+.submit_button img, .submit_button span{
+	transition: all ease-in-out 0.3s;
 }
 @keyframes roll {
   0% {
@@ -108,21 +110,25 @@
   }
 }
 
-#submit_button.spinning {
+.submit_button.spinning {
 	cursor: not-allowed;
 	background-color: #6497CCCC;
 	box-shadow: none;
 }
 
-#submit_button.spinning img{
-	margin-left: 7em;
+.submit_button.spinning img{
+	margin-left: 15em;
 }
 
-#submit_button:hover{
+.submit_button.spinning span{
+	margin-left: -2em;
+}
+
+.submit_button:hover{
     box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 2px 4px rgba(154, 154, 154, 0.55), 0 0 10px rgba(0, 0, 0, 0.13);
 }
 
-#submit_button.spinning:hover {
+.submit_button.spinning:hover {
 	box-shadow: none;
 }
 

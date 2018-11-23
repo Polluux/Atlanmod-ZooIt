@@ -7,7 +7,7 @@ block content
     p Transform your Xcore in Maven artefact
 
   .block
-    form#form(action="/", method="post")
+    form#form
       div.section.cutinhalf#section-required
         div.form_half
           h3 Votre fichier XCore
@@ -27,9 +27,10 @@ block content
             input(type="text", name="version", required, pattern="[A-Za-z0-9.-]+").field_field
             div.field_description Version de l'artefact (Ex : 1.0.0)
 
-          label.field
-            input#checkbox_maven_toggler(type="checkbox", name="mavencentral").field_field
-            div.field_description(style="display: inline") Déployer sur Maven central 
+          // For now, we do not deploy on Maven Central
+          //label.field
+          //  input#checkbox_maven_toggler(type="checkbox", name="mavencentral").field_field
+          //  div.field_description(style="display: inline") Déployer sur Maven central 
 
       div.section#section-maven
 
@@ -72,10 +73,15 @@ block content
               div.field_description Année de création
 
 
-      div.section#section-submit
-        div#submit_button
-          span Envoyer
-          img(src="/img/spinner.png")
+      div.section#section-submit.cutinhalf
+        div.form_half
+          div.submit_button#submit_artifact
+            span Télécharger l'artefact Maven
+            img(src="/img/spinner.png")
+        div.form_half
+          div.submit_button#submit_pr
+            span Faire une PR du zoo
+            img(src="/img/spinner.png")
 
   script(type="text/javascript", src="/libs/filepond/filepond.min.js")
   script(type="text/javascript", src="/scripts/form.js")
