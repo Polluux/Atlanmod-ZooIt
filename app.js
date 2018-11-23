@@ -38,4 +38,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+const clientID = '8159ce6e362677e0103d'
+const clientSecret = '2045b4a83a4ace85976601be88508fc5c98422de'
+
 module.exports = app;

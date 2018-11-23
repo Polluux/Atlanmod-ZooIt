@@ -16,6 +16,8 @@
     "zip-folder": "~1.0.0",
     "formidable": "~1.2.1",
     "rimraf": "2.6.2",
-    "xml2js": "0.4.19"
+    "xml2js": "0.4.19",
+    "github-oauth": "0.2.2",
+    "git-commit-push-via-github-api":"1.0.1"
   }
 }
