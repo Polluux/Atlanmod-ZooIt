@@ -81,8 +81,13 @@ block content
   script(type="text/javascript", src="/scripts/form.js")
   script.
     const inputElement = document.getElementById('file_input');
-    const pond = FilePond.create( inputElement );
-    FilePond.setOptions({
-        server: '/file',
+    const pond = FilePond.create( inputElement , {
+      acceptedFileTypes: ['image/png'],
+      server: '/file',
     });
+    pond.onaddfilestart = function(file){
+      if (file.fileExtension.trim() == "xcore"){return}
+      pond.removeFile() ;
+      pond.labelIdle += " XCore files"
+    }
   script(type="text/javascript", src="/scripts/submit.js")
