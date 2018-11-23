@@ -1,16 +1,23 @@
 document.addEventListener('DOMContentLoaded',function() {
-    document.getElementById('submit_button').onclick=() => {submit(document.getElementById("form"))};
+    document.getElementById('submit_artifact').onclick=() => {
+        submit(document.getElementById("form"), "/", "POST", document.getElementById('submit_artifact'), load=true)
+    };
 },false);
 
-function submit(form){
+document.addEventListener('DOMContentLoaded',function() {
+    document.getElementById('submit_pr').onclick=() => {
+        submit(document.getElementById("form"), "/", "POST", document.getElementById('submit_pr'))
+    };
+},false);
+
+function submit(form, url, method, submit_button, load=false){
     if (! form.reportValidity()){
         return
     }
 
-    document.getElementById('submit_button').classList.add('spinning');
+    submit_button.classList.add('spinning');
 
-    var url = form.action,
-        xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
 
     //This is a bit tricky, [].fn.call(form.elements, ...) allows us to call .fn
     //on the form's elements, even though it's not an array. Effectively
@@ -28,15 +35,15 @@ function submit(form){
         return encodeURIComponent(el.name) + '=' + encodeURIComponent(el.value);
     }).join('&'); //Then join all the strings by &
 
-    xhr.open("POST", url);
+    xhr.open(method, url);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     // courtesy of https://nehalist.io/downloading-files-from-post-requests/
     //.bind ensures that this inside of the function is the XHR object.
     xhr.onload = function () {
-        document.getElementById('submit_button').classList.remove('spinning');
+        submit_button.classList.remove('spinning');
         // Only handle status code 200
-        if(xhr.status === 200) {
+        if(xhr.status === 200 && load) {
         // Try to find out the filename from the content disposition `filename` value
             var disposition = xhr.getResponseHeader('content-disposition');
             var matches = /"([^"]*)"/.exec(disposition);
