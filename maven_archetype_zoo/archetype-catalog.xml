@@ -3,7 +3,7 @@
       <archetypes>
         <archetype>
           <groupId>com.atlanmod.zoo<groupId/>
-          <artifactId>xcore-generation-archetype<artifactId/>
+          <artifactId>xcore-generation-archetype-zoo<artifactId/>
           <version>1.0<version/>
         </archetype>
       </archetypes>
