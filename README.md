@@ -1,14 +1,17 @@
 # Capstone Project Moulinette
 
-## installation 
+## Installation 
 ```
 $ cd capstone
-$ npm install
-$ cd maven_archetype
-$ ./install_archetype.sh
+$ npm run initialize
 ```
 
-## lauching in debug mode
+## Lauching in debug mode
 ```
 $ DEBUG=* npm start
+```
+
+## Start the application
+```
+$ npm run start
 ```
