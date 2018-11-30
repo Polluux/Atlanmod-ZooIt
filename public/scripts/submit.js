@@ -1,16 +1,26 @@
 document.addEventListener('DOMContentLoaded',function() {
     document.getElementById('submit_artifact').onclick=() => {
-        submit(document.getElementById("form"), "/", "POST", document.getElementById('submit_artifact'), load=true)
+        submit_ajax(document.getElementById("form"), document.getElementById('submit_artifact'))
     };
 },false);
 
 document.addEventListener('DOMContentLoaded',function() {
     document.getElementById('submit_pr').onclick=() => {
-        submit(document.getElementById("form"), "/", "POST", document.getElementById('submit_pr'))
+        submit_not_ajax(document.getElementById("form"), document.getElementById('submit_pr'))
     };
 },false);
 
-function submit(form, url, method, submit_button, load=false){
+
+function submit_not_ajax(form, submit_button){
+    if (! form.reportValidity()){
+        return
+    }
+    submit_button.classList.add('spinning');
+    form.submit();
+    submit_button.classList.remove('spinning');
+}
+
+function submit_ajax(form, submit_button){
     if (! form.reportValidity()){
         return
     }
@@ -35,7 +45,7 @@ function submit(form, url, method, submit_button, load=false){
         return encodeURIComponent(el.name) + '=' + encodeURIComponent(el.value);
     }).join('&'); //Then join all the strings by &
 
-    xhr.open(method, url);
+    xhr.open("POST", "/");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     // courtesy of https://nehalist.io/downloading-files-from-post-requests/
@@ -43,7 +53,7 @@ function submit(form, url, method, submit_button, load=false){
     xhr.onload = function () {
         submit_button.classList.remove('spinning');
         // Only handle status code 200
-        if(xhr.status === 200 && load) {
+        if(xhr.status === 200) {
         // Try to find out the filename from the content disposition `filename` value
             var disposition = xhr.getResponseHeader('content-disposition');
             var matches = /"([^"]*)"/.exec(disposition);
@@ -61,7 +71,7 @@ function submit(form, url, method, submit_button, load=false){
 
             document.body.removeChild(link);
         }
-        };
+    };
 
     //All preperations are clear, send the request!
     xhr.send(params);

@@ -76,8 +76,6 @@ function createArtifact(propertiesObject, archetype, zip, callback){
 				callback(errFolder,null)
 			}else{
 
-				var archetype = "xcore-generation-archetype"
-
 				//Generate the maven artifact (architecture + pom.xml)
 				generateMavenArtifact(propertiesObject.artifactID, propertiesObject.groupID, propertiesObject.version, archetype, function(err){			
 					if(err){

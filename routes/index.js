@@ -45,7 +45,7 @@ var githubOAuth = require('github-oauth')({
 	scope: 'repo',
 })
 
-router.get('/github-oauth', function(req, res){
+router.post('/github-oauth', function(req, res){
 	return githubOAuth.login(req, res);
 })
 
