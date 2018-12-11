@@ -1,17 +1,19 @@
 document.addEventListener('DOMContentLoaded',function() {
+    // add listeners
     document.getElementById('submit_artifact').onclick=() => {
         submit_ajax(document.getElementById("form"), document.getElementById('submit_artifact'))
     };
-},false);
-
-document.addEventListener('DOMContentLoaded',function() {
     document.getElementById('submit_pr').onclick=() => {
-        submit_not_ajax(document.getElementById("form"), document.getElementById('submit_pr'))
+        submit_form(document.getElementById("form"), document.getElementById('submit_pr'))
     };
+    // add github code to form
+    document.getElementById('github-token').value = new URL(window.location).searchParams.get("code");
 },false);
 
 
-function submit_not_ajax(form, submit_button){
+
+
+function submit_form(form, submit_button){
     if (! form.reportValidity()){
         return
     }

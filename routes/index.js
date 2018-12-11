@@ -51,7 +51,7 @@ var githubOAuth = require('github-oauth')({
 	// githubSecret: '2045b4a83a4ace85976601be88508fc5c98422de',
 	baseURL: 'http://localhost:3000',
 	loginURI: '/github-oauth',
-	callbackURI: '/',
+	callbackURI: '/form',
 	scope: 'repo',
 })
 
@@ -68,7 +68,7 @@ router.post('/zoo-request', function(req, res){
 
 	artifactService.createArtifact(req.body, archetype, false, function(error,result){
 		if(error){
-			serverResponse.send('Error :\n'+error)
+			res.send('Error :\n'+error)
 		}else{
 			zooRequest.requestNewArtifact(token, artifactID, fileName ,function(){});
 		}
@@ -81,8 +81,8 @@ githubOAuth.on('error', function(err) {
 	console.error('there was a login error', err)
 })
 
-githubOAuth.on('token', function(token, serverResponse) {			
-	serverResponse.render('index');	
+githubOAuth.on('token', function(token, res) {			
+	res.render('index');	// PAS BON
 })
 
 module.exports = router;
