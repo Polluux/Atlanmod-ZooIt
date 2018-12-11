@@ -3,82 +3,82 @@ extends layout
 
 block content
 
-  .block
-    form#form(action="/zoo-request", method="POST")
-      div.section.cutinhalf#section-required
-        div.half
-          h3 Votre fichier XCore
-          input#file_input(type="file", name="file", required).filepond
-        div#form_fields.half
-          h3 Champs obligatoires
+  form#form(action="/zoo-request", method="POST")
+    input(type="hidden", name="github-token")#github-token
+    div.section.cutinhalf#section-required
+      div.half
+        h3 Votre fichier XCore
+        input#file_input(type="file", name="file", required).filepond
+      div#form_fields.half
+        h3 Champs obligatoires
+
+        label.field
+          input(type="text", name="artifactID", required, pattern="[A-Za-z0-9.-]+").field_field
+          div.field_description ID de l'artefact
+
+        label.field
+          input(type="text", name="groupID", required, pattern="[A-Za-z0-9.-]+").field_field
+          div.field_description Groupe de l'artefact (Ex : com.company.project)
+
+        label.field
+          input(type="text", name="version", required, pattern="[A-Za-z0-9.-]+").field_field
+          div.field_description Version de l'artefact (Ex : 1.0.0)
+
+        // For now, we do not deploy on Maven Central
+        //label.field
+        //  input#checkbox_maven_toggler(type="checkbox", name="mavencentral").field_field
+        //  div.field_description(style="display: inline") Déployer sur Maven central 
+
+    div.section#section-maven
+
+        h3 Champs nécessaires pour déployer sur le Central
+        p Pour plus de détails, voir #[a(href="https://central.sonatype.org/pages/requirements.html", target="_blank") la documentation].
+
+        div.content
+          label.field
+            input(type="text", name="artifactName").field_field.mvn_required
+            div.field_description Nom de l'artefact à générer
 
           label.field
-            input(type="text", name="artifactID", required, pattern="[A-Za-z0-9.-]+").field_field
-            div.field_description ID de l'artefact
+            input(type="text", name="artifactDescription").field_field.mvn_required
+            div.field_description Description de l'artefact
 
           label.field
-            input(type="text", name="groupID", required, pattern="[A-Za-z0-9.-]+").field_field
-            div.field_description Groupe de l'artefact (Ex : com.company.project)
+            input(type="url", name="artifactURL").field_field.mvn_required
+            div.field_description URL du projet
 
-          label.field
-            input(type="text", name="version", required, pattern="[A-Za-z0-9.-]+").field_field
-            div.field_description Version de l'artefact (Ex : 1.0.0)
+          label.field.large
+            textarea#textarea_developpers(name="developers", spellcheck="false").field_field.mvn_required
+            div.field_description developpeurs 
 
-          // For now, we do not deploy on Maven Central
-          //label.field
-          //  input#checkbox_maven_toggler(type="checkbox", name="mavencentral").field_field
-          //  div.field_description(style="display: inline") Déployer sur Maven central 
+          label.field.large
+            textarea#textarea_scm(name="scm", spellcheck="false").field_field.mvn_required
+            div.field_description versionnement
 
-      div.section#section-maven
+    div.section#section-optionnal
 
-          h3 Champs nécessaires pour déployer sur le Central
-          p Pour plus de détails, voir #[a(href="https://central.sonatype.org/pages/requirements.html", target="_blank") la documentation].
+        h3 Champs optionnels
 
-          div.content
-            label.field
-              input(type="text", name="artifactName").field_field.mvn_required
-              div.field_description Nom de l'artefact à générer
+        div.content
 
-            label.field
-              input(type="text", name="artifactDescription").field_field.mvn_required
-              div.field_description Description de l'artefact
+          label.field.large
+            input(type="text", name="organization").field_field
+            div.field_description Organisation 
 
-            label.field
-              input(type="url", name="artifactURL").field_field.mvn_required
-              div.field_description URL du projet
-
-            label.field.large
-              textarea#textarea_developpers(name="developers", spellcheck="false").field_field.mvn_required
-              div.field_description developpeurs 
-
-            label.field.large
-              textarea#textarea_scm(name="scm", spellcheck="false").field_field.mvn_required
-              div.field_description versionnement
-
-      div.section#section-optionnal
-
-          h3 Champs optionnels
-
-          div.content
-
-            label.field.large
-              input(type="text", name="organization").field_field
-              div.field_description Organisation 
-
-            label.field.large
-              input(type="text", name="year", pattern="[0-9]{4}").field_field
-              div.field_description Année de création
+          label.field.large
+            input(type="text", name="year", pattern="[0-9]{4}").field_field
+            div.field_description Année de création
 
 
-      div.section#section-submit.cutinhalf
-        div.half
-          div.submit_button#submit_artifact
-            span Télécharger l'artefact Maven
-            img(src="/img/spinner.png")
-        div.half
-          div.submit_button#submit_pr
-            span Faire une PR du zoo
-            img(src="/img/spinner.png")
+    div.section#section-submit.cutinhalf
+      div.half
+        div.submit_button#submit_artifact
+          span Télécharger l'artefact Maven
+          img(src="/img/spinner.png")
+      div.half
+        div.submit_button#submit_pr
+          span Faire une PR du zoo
+          img(src="/img/spinner.png")
 
   script(type="text/javascript", src="/libs/filepond/filepond.min.js")
   script(type="text/javascript", src="/scripts/form.js")

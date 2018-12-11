@@ -3,33 +3,32 @@ extends layout
 
 block content
 
-  .block
-    section.section
-      p Nursery est un service gentillement proposé par et pour le #[a(href="https://www.ls2n.fr/", target="_blank") LS2N] dans le but de repeupler le #[a(href="", target="_blank") zoo]. 
-      h2 Comment ça marche ?
-      p Nous vous proposons de transformer vos fichiers #[em XCore] en #[em artefact Maven]. Alternativement, si vous vous connectez à GitHub, nous pouvons également faire votre #[em pull request] vers le #[a(href="https://github.com/atlanmod/zoo") zoo] automatiquement.
-      p De plus, un #[a(href="/manual") manuel] est à votre disposition pour faire les transformations vous-même.
-    section.section
-      h2 Automatiquement
-      div.cutinhalf
-        div.half
-          h3 Je continue sans connexion
-          ul
-            li Je pourrait exporter mon modèle EMF en artefact Maven
-        div.half
-          h3 Je m'authentifie sur GitHub
-          ul
-            li Je pourrait exporter mon modèle EMF en artefact Maven
-            li Je pourrait faire une PR vers le zoo 
+  section.section
+    p Nursery est un service gentillement proposé par et pour le #[a(href="https://www.ls2n.fr/", target="_blank") LS2N] dans le but de repeupler le #[a(href="", target="_blank") zoo]. 
+    h2 Comment ça marche ?
+    p Nous vous proposons de transformer vos fichiers #[em XCore] en #[em artefact Maven]. Alternativement, si vous vous connectez à GitHub, nous pouvons également faire votre #[em pull request] vers le #[a(href="https://github.com/atlanmod/zoo", target="_blank") zoo] automatiquement.
+    p De plus, un #[a(href="/manual") manuel] est à votre disposition pour faire les transformations vous-même.
+  section.section
+    h2 Automatiquement
+    div.cutinhalf
+      div.half
+        h3 Je continue sans connexion
+        ul
+          li Je pourrait exporter mon modèle EMF en artefact Maven
+      div.half
+        h3 Je m'authentifie sur GitHub
+        ul
+          li Je pourrait exporter mon modèle EMF en artefact Maven
+          li Je pourrait faire une PR vers le zoo 
 
-      div.cutinhalf
-        div.half
-          a.submit_button(href="/form" title="Aller au formulaire")
-            span Continuer
-        div.half
-          a.submit_button(href="/github-oauth" title="Aller au formulaire après authentifiaction")
-            span S'authentifier
+    div.cutinhalf
+      div.half
+        a.submit_button(href="/form" title="Aller au formulaire")
+          span Continuer
+      div.half
+        a.submit_button(href="/github-oauth" title="Aller au formulaire après authentifiaction")
+          span S'authentifier
 
-    section.section
-      h2 Pas à pas
-      p Lisez notre #[a(href="/manual") manuel].
+  section.section
+    h2 Pas à pas
+    p Lisez notre #[a(href="/manual") manuel].
