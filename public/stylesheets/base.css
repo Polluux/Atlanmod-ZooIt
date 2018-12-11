@@ -22,10 +22,14 @@ h1, h2, h3, em {
 }
 
 em, a {
-	color: var(--highlight);
+	color: #000;
 	font-style: normal;
 	font-size: initial;
 	font-weight: bold;
+}
+
+em {
+	color: var(--highlight);
 }
 
 ul {
