@@ -21,10 +21,14 @@ h1, h2, h3, em {
 	font-family: "Quicksand", sans-serif;
 }
 
-em {
+em, a {
 	color: var(--highlight);
 	font-style: normal;
 	font-size: initial;
 	font-weight: bold;
+}
+
+ul {
+	list-style-type: circle;
 }
 

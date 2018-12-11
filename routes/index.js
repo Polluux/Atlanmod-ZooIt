@@ -16,6 +16,11 @@ router.get('/form', function(req, res, next) {
   res.render('form');
 });
 
+/* GET manual page. */
+router.get('/manual', function(req, res, next) {
+  res.render('manual');
+});
+
 router.post('/file', function(req, res, next){
 
 	var form = new formidable.IncomingForm();
