@@ -5,14 +5,7 @@ document.addEventListener('DOMContentLoaded',function() {
     };
     document.getElementById('submit_pr').onclick=() => {
         submit_form(document.getElementById("form"), document.getElementById('submit_pr'))
-    };
-    // add github code to form or hide pr button
-    var code = new URL(window.location).searchParams.get("code");
-    if (code == null){
-        document.getElementById('submit_pr').style.display = "none"; 
-    } else {
-        document.getElementById('github-token').value = code;
-    }
+    };    
 },false);
 
 

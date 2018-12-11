@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 
 /* GET form page. */
 router.get('/form', function(req, res, next) {
-  res.render('form');
+  return githubOAuth.callback(req, res);
 });
 
 /* GET manual page. */
@@ -48,7 +48,7 @@ router.post('/', function(req, res, next){
 
 var githubOAuth = require('github-oauth')({
 	githubClient: '8159ce6e362677e0103d',
-	// githubSecret: '2045b4a83a4ace85976601be88508fc5c98422de',
+	githubSecret: '2045b4a83a4ace85976601be88508fc5c98422de',
 	baseURL: 'http://localhost:3000',
 	loginURI: '/github-oauth',
 	callbackURI: '/form',
@@ -59,8 +59,7 @@ router.get('/github-oauth', function(req, res){
 	return githubOAuth.login(req, res);
 })
 
-router.post('/zoo-request', function(req, res){	
-	//return githubOAuth.callback(req, res);
+router.post('/zoo-request', function(req, res){		
 	var archetype = "xcore-generation-archetype-zoo"
 
 	artifactID = req.body.artifactID;
@@ -70,7 +69,7 @@ router.post('/zoo-request', function(req, res){
 		if(error){
 			res.send('Error :\n'+error)
 		}else{
-			zooRequest.requestNewArtifact(req.body.githubtoken, artifactID, filename ,function(){});
+			zooRequest.requestNewArtifact(req.body.githubtoken, artifactID, filename.split('#')[1] ,function(){});
 		}
 	});
 })
@@ -81,8 +80,8 @@ githubOAuth.on('error', function(err) {
 	console.error('there was a login error', err)
 })
 
-githubOAuth.on('token', function(token, res) {			
-	res.render('index');	// PAS BON
+githubOAuth.on('token', function(token, res) {
+	res.render('form', {token:token.access_token});	
 })
 
 module.exports = router;

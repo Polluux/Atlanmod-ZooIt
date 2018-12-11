@@ -38,6 +38,7 @@ function requestNewArtifact(token, artifactID, xcoreFile, callback){
                 
                     request.post(options, (err, res, body) => {
                         if (err) { return console.log(err); }
+
                         forkName = JSON.parse(body).source.name;
                         makeNewBranch(token, artifactID, forkName, username, function(branchName){                        
                             commitPushPullRequest(username, forkName,token, artifactID, xcoreFile, branchName);
