@@ -38,19 +38,31 @@ router.post('/', function(req, res, next){
 
 var githubOAuth = require('github-oauth')({
 	githubClient: '8159ce6e362677e0103d',
-	githubSecret: '2045b4a83a4ace85976601be88508fc5c98422de',
+	// githubSecret: '2045b4a83a4ace85976601be88508fc5c98422de',
 	baseURL: 'http://localhost:3000',
 	loginURI: '/github-oauth',
-	callbackURI: '/zoo-request',
+	callbackURI: '/',
 	scope: 'repo',
 })
 
-router.post('/github-oauth', function(req, res){
+router.get('/github-oauth', function(req, res){
 	return githubOAuth.login(req, res);
 })
 
-router.get('/zoo-request', function(req, res){	
-	return githubOAuth.callback(req, res);
+router.post('/zoo-request', function(req, res){	
+	//return githubOAuth.callback(req, res);
+	var archetype = "xcore-generation-archetype-zoo"
+
+	artifactID = req.body.artifactID;
+	filename = req.body.file;
+
+	artifactService.createArtifact(req.body, archetype, false, function(error,result){
+		if(error){
+			serverResponse.send('Error :\n'+error)
+		}else{
+			zooRequest.requestNewArtifact(token, artifactID, fileName ,function(){});
+		}
+	});
 })
 
 
@@ -59,22 +71,8 @@ githubOAuth.on('error', function(err) {
 	console.error('there was a login error', err)
 })
 
-githubOAuth.on('token', function(token, serverResponse) {
-	// TODO : make artifactID and filename great again
-	var artifactID = "kraken"
-	var fileName = "Kraken.xcore"
-
-	var archetype = "xcore-generation-archetype-zoo"
-
-	artifactService.createArtifact(serverResponse.body, archetype, false, function(error,result){
-		if(error){
-			serverResponse.send('Error :\n'+error)
-		}else{
-			zooRequest.requestNewArtifact(token, artifactID, fileName ,function(){});
-		}
-	});
-			
-	serverResponse.render('zoo-request');	
+githubOAuth.on('token', function(token, serverResponse) {			
+	serverResponse.render('index');	
 })
 
 module.exports = router;

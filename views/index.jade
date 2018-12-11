@@ -7,7 +7,7 @@ block content
     p Transform your Xcore in Maven artefact
 
   .block
-    form#form(action="/github-oauth", method="POST")
+    form#form(action="/zoo-request", method="POST")
       div.section.cutinhalf#section-required
         div.form_half
           h3 Votre fichier XCore
@@ -82,6 +82,8 @@ block content
           div.submit_button#submit_pr
             span Faire une PR du zoo
             img(src="/img/spinner.png")
+
+        a(href="/github-oauth") gvygtv
 
   script(type="text/javascript", src="/libs/filepond/filepond.min.js")
   script(type="text/javascript", src="/scripts/form.js")
