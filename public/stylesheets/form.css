@@ -2,10 +2,6 @@
     width: 100%;
 }
 
-.form_half{
-	width: 49%;
-}
-
 #section-maven .content, #section-optionnal .content{
 	display: flex;
 	flex-direction: row;
@@ -80,6 +76,7 @@
 	background-color: var(--highlight);
 	color: #FFF;
 	cursor: pointer!important;
+	text-decoration: none;
 
 	box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 	transition: box-shadow ease-in-out 0.3s;

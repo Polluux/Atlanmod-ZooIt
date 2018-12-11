@@ -2,17 +2,14 @@ extends layout
 
 
 block content
-  #title
-    h1 Moulinette
-    p Transform your Xcore in Maven artefact
 
   .block
     form#form(action="/github-oauth", method="POST")
       div.section.cutinhalf#section-required
-        div.form_half
+        div.half
           h3 Votre fichier XCore
           input#file_input(type="file", name="file", required).filepond
-        div#form_fields.form_half
+        div#form_fields.half
           h3 Champs obligatoires
 
           label.field
@@ -74,11 +71,11 @@ block content
 
 
       div.section#section-submit.cutinhalf
-        div.form_half
+        div.half
           div.submit_button#submit_artifact
             span Télécharger l'artefact Maven
             img(src="/img/spinner.png")
-        div.form_half
+        div.half
           div.submit_button#submit_pr
             span Faire une PR du zoo
             img(src="/img/spinner.png")

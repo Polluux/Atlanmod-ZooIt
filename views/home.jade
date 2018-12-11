@@ -1,0 +1,32 @@
+extends layout
+
+
+block content
+
+  .block
+    p Nursery est un service gentillement proposé par et pour le #[a(href="https://www.ls2n.fr/", target="_blank") LS2N] dans le but de repeupler le #[a(href="", target="_blank") zoo]. 
+    h2 Comment ça marche ?
+    p Nous vous proposons de transformer vos fichiers #[em XCore] en #[em artefact Maven]. Alternativement, si vous vous connectez à GitHub, nous pouvons également faire votre #[em pull request] vers le #[a(href="https://github.com/atlanmod/zoo") zoo] automatiquement.
+    p De plus, vous trouverez une section pour faire les transformations vous-même.
+    div.cutinhalf
+      div.half
+        h3 Je continue sans connexion
+        ul
+          li Je pourrait exporter mon modèle EMF en artefact Maven
+      div.half
+        h3 Je m'authentifie sur GitHub
+        ul
+          li Je pourrait exporter mon modèle EMF en artefact Maven
+          li Je pourrait faire une PR vers le zoo 
+
+    div.cutinhalf
+      div.half
+        a.submit_button(href="/form")
+          span Continuer
+      div.half
+        a.submit_button(href="/form")
+          span S'authentifier
+
+    div
+      h2 Je veux tout faire moi-même !
+      p C'est en préparation, on se calme !

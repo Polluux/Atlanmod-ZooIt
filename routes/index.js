@@ -8,7 +8,12 @@ var formidable = require('formidable');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('home');
+});
+
+/* GET form page. */
+router.get('/form', function(req, res, next) {
+  res.render('form');
 });
 
 router.post('/file', function(req, res, next){

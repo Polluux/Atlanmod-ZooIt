@@ -29,6 +29,10 @@
     align-items: flex-start;
 }
 
+.half{
+    width: 49%;
+}
+
 .section:nth-child(-n+2){
     border-bottom: 1px solid var(--light-gray);
 }

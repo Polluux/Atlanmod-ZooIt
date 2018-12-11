@@ -20,3 +20,11 @@ body {
 h1, h2, h3, em {
 	font-family: "Quicksand", sans-serif;
 }
+
+em {
+	color: var(--highlight);
+	font-style: normal;
+	font-size: initial;
+	font-weight: bold;
+}
+
