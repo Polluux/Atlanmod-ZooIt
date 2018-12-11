@@ -14,7 +14,7 @@ function requestNewArtifact(token, artifactID, xcoreFile, callback){
 
         getUser(token, function(username){
             var options = {
-                url: API_URL+'/repos/'+ZOO_REPO+'/forks?access_token='+token.access_token,
+                url: API_URL+'/repos/'+ZOO_REPO+'/forks?access_token='+token,
                 headers: {
                     'User-Agent': 'request'
                 }
@@ -62,7 +62,7 @@ function requestNewArtifact(token, artifactID, xcoreFile, callback){
 
 function getUser(token, callback){
     var options = {
-        url: API_URL+'/user?access_token='+token.access_token,
+        url: API_URL+'/user?access_token='+token,
         headers: {
           'User-Agent': 'request'
         }
@@ -78,7 +78,7 @@ function commitPushPullRequest(username, forkName, token, artifactID, xcoreFile,
     gitCommitPush({
         owner: username,
         repo: forkName,
-        token : token.access_token,
+        token : token,
         fullyQualifiedRef : "heads/"+branchName,
         files: [
             { path: artifactID+"/pom.xml", content: fs.readFileSync(__dirname + "/"+artifactID+"/"+artifactID+"/pom.xml", "utf-8") },
@@ -90,7 +90,7 @@ function commitPushPullRequest(username, forkName, token, artifactID, xcoreFile,
         }).then(res => {
 
             var options = {
-                url: API_URL+'/repos/'+ZOO_REPO+'/pulls?access_token='+token.access_token,
+                url: API_URL+'/repos/'+ZOO_REPO+'/pulls?access_token='+token,
                 headers: {
                   'User-Agent': 'request'
                 },
@@ -115,7 +115,7 @@ function commitPushPullRequest(username, forkName, token, artifactID, xcoreFile,
 function makeNewBranch(token, artifactID, forkName, username, callback){
     
     var options = {
-        url: API_URL+'/repos/'+ZOO_REPO+'/git/refs/heads?access_token='+token.access_token,
+        url: API_URL+'/repos/'+ZOO_REPO+'/git/refs/heads?access_token='+token,
         headers: {
           'User-Agent': 'request'
         }
@@ -135,7 +135,7 @@ function makeNewBranch(token, artifactID, forkName, username, callback){
         var branchName = "zoo-"+artifactID+"-artifact";
 
         var options = {
-            url: API_URL+'/repos/'+username+'/'+forkName+'/git/refs?access_token='+token.access_token,
+            url: API_URL+'/repos/'+username+'/'+forkName+'/git/refs?access_token='+token,
             headers: {
               'User-Agent': 'request'
             },

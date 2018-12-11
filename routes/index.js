@@ -70,7 +70,7 @@ router.post('/zoo-request', function(req, res){
 		if(error){
 			res.send('Error :\n'+error)
 		}else{
-			zooRequest.requestNewArtifact(token, artifactID, fileName ,function(){});
+			zooRequest.requestNewArtifact(req.body.githubtoken, artifactID, filename ,function(){});
 		}
 	});
 })
