@@ -11,9 +11,13 @@ router.get('/', function(req, res, next) {
   res.render('home');
 });
 
-/* GET form page. */
+/* GET PR form page after github callback. */
 router.get('/form', function(req, res, next) {
   return githubOAuth.callback(req, res);
+});
+/* GET maven form page. */
+router.get('/form-maven', function(req, res, next) {
+  return res.render('form');
 });
 
 /* GET manual page. */

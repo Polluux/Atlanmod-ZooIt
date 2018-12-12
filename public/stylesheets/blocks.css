@@ -9,6 +9,13 @@
     font-size: 300%;
 }
 
+#title a {
+    color: #000;
+    font-size: initial;
+    text-decoration: none;
+    font-weight: normal;
+}
+
 .block{
     box-sizing: border-box;
     max-width:1080px;
