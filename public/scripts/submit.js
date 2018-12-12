@@ -1,16 +1,3 @@
-document.addEventListener('DOMContentLoaded',function() {
-    // add listeners
-    document.getElementById('submit_artifact').onclick=() => {
-        submit_ajax(document.getElementById("form"), document.getElementById('submit_artifact'))
-    };
-    document.getElementById('submit_pr').onclick=() => {
-        submit_form(document.getElementById("form"), document.getElementById('submit_pr'))
-    };    
-},false);
-
-
-
-
 function submit_form(form, submit_button){
     if (! form.reportValidity()){
         return

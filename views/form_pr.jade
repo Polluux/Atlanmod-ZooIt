@@ -1,0 +1,24 @@
+extends form_base
+
+
+block hiddentoken
+  input(type="hidden", name="githubtoken", value="#{token}")#github-token
+
+
+
+block submit
+  div.section#section-submit
+    div.submit_button#submit_pr
+      span Faire une PR du zoo
+      img(src="/img/spinner.png")
+
+    p#operation_time(style='display:none') L'opération peut prendre jusqu'à deux minute
+
+block scripts 
+  script.
+    document.addEventListener('DOMContentLoaded',function() {
+      // add listeners
+      document.getElementById('submit_pr').onclick=() => {
+          submit_form(document.getElementById("form"), document.getElementById('submit_pr'))
+      }; 
+    },false);

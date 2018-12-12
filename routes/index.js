@@ -17,8 +17,9 @@ router.get('/form', function(req, res, next) {
 });
 /* GET maven form page. */
 router.get('/form-maven', function(req, res, next) {
-  return res.render('form');
+  return res.render('form_maven');
 });
+
 
 /* GET manual page. */
 router.get('/manual', function(req, res, next) {
@@ -85,7 +86,7 @@ githubOAuth.on('error', function(err) {
 })
 
 githubOAuth.on('token', function(token, res) {
-	res.render('form', {token:token.access_token});	
+	res.render('form_pr', {token:token.access_token});
 })
 
 module.exports = router;
