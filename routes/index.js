@@ -44,7 +44,7 @@ router.post('/', function(req, res, next){
 		if(error){
 			res.send('Error :\n'+error)
 		}else{
-			res.download(path.join(__dirname,"../services/",result),result)
+			res.download(path.join(__dirname,"../temp",result),result)
 		}
 	});
 	

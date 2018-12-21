@@ -30,11 +30,13 @@ if(process.argv.length < 3){
 	list_properties_not_supported.forEach(function(val){
 		console.log('\t-'+val+'=<'+val+'> (Not implemented yet)')
 	})
+	close()
 	return
 }
 
 if(!regex_XCORE.test(process.argv[2])){
 	console.log("--- [ERROR] The file specified must be a xcore file.")
+	close()
 	return
 }
 
@@ -42,6 +44,7 @@ var filePath = (process.argv[2].charAt(0) == '/' ? process.argv[2] : path.join(_
 
 if (!fs.existsSync(filePath)){
 	console.log("--- [ERROR] The file specified doesn't seem to exist at path : "+filePath+".")
+	close()
 	return
 }
 
@@ -63,7 +66,7 @@ console.log("=== Generating the artifact for file "+filePath.split('/').pop()+" 
 
 fillParameters(function(){
 	params.file = filePath
-	artifactService.createArtifact(params,function(err,res){
+	artifactService.createArtifact(params,"xcore-generation-archetype",true,function(err,res){
 		if(err){
 			console.log("--- [ERROR] An error occured during the generation :\n"+err)
 		}else{
@@ -98,7 +101,7 @@ async function fillParameters(callback){
 		}
 	} 
 
-	rl.close()
+	close()
 	callback()
 }
 
@@ -114,3 +117,6 @@ function ask(question,regex){
 	})
 }
 
+function close(){
+	rl.close()
+}

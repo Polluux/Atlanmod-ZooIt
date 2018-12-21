@@ -60,11 +60,8 @@ typings/
 # next.js build output
 .next
 
-# Generated zip files in service
-services/*
-!services/create_artifact.js
-!services/zoo-request.js
-!services/prompt_script.js
+# Generated files in temp
+temp/
 
 # The package-lock.son
 package-lock.json
