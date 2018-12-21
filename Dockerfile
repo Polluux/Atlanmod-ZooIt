@@ -3,3 +3,4 @@ COPY . /Capstone_Moulinette
 WORKDIR /Capstone_Moulinette
 RUN npm run initialize
 RUN node tests/test_create_artifact.js
+RUN npm start
