@@ -62,6 +62,7 @@ typings/
 
 # Generated files in temp
 temp/
+!temp/.empty
 
 # The package-lock.son
 package-lock.json
