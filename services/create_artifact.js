@@ -14,7 +14,7 @@ function createFolder(dirPath,callback){
 	}catch(err){
 		if (err.code == "EEXIST"){
 			//Directory already exist, need to remove /!\
-			rimraf(path.join(__dirname,dirPath,dirPath),function(){
+			rimraf(path.join(__dirname,dirPath,dirPath.split('/').pop()),function(){
 				callback(null)
 			})
 		}else{
@@ -37,7 +37,7 @@ function generateMavenArtifact(artifactID, groupID, version, archetype, callback
 		var command = "yes |mvn archetype:generate -DarchetypeCatalog=local -DarchetypeGroupId=com.atlanmod.zoo -DarchetypeArtifactId="+archetype+" -DarchetypeVersion=1.0 -DgroupId="+groupID+" -DartifactId="+artifactID+" -Dversion="+version;
 		
 		const execSync = require('child_process').execSync;
-		execSync(command, {cwd: path.join(__dirname,artifactID)}, (e, stdout, stderr)=> {
+		execSync(command, {cwd: path.join(__dirname,"../temp/"+artifactID)}, (e, stdout, stderr)=> {
 			if (e instanceof Error) {	
 				console.error(e);	
 			}		
@@ -71,7 +71,7 @@ function createArtifact(propertiesObject, archetype, zip, callback){
 	}else{
 
 		//Create a folder with propertiesObject.artefactID, used as a root folder for the zip
-		createFolder("./"+propertiesObject.artifactID,function(errFolder){
+		createFolder("../temp/"+propertiesObject.artifactID,function(errFolder){
 			if(errFolder){
 				callback(errFolder,null)
 			}else{
@@ -84,13 +84,13 @@ function createArtifact(propertiesObject, archetype, zip, callback){
 
 						//Copy the xcore file from the tmp directory to services
 						//Ask Roxane about the #, her idea (Split in 2 parts ->  [0] : The location of the file downloaded (in tmp) // [1] : The real name of the file)
-						var artifactArchitecturePath = propertiesObject.artifactID+"/"+propertiesObject.artifactID+"/src/main/model/"
+						var artifactArchitecturePath = "../temp/"+propertiesObject.artifactID+"/"+propertiesObject.artifactID+"/src/main/model/"
 						fs.createReadStream(propertiesObject.file.split('#')[0]).pipe(fs.createWriteStream(path.join(__dirname,artifactArchitecturePath+propertiesObject.file.split('#')[1])));
 
 
 						//Modify the pom.xml to add facultatives properties
 						var parser = new xml2js.Parser()
-						var pomDir = path.join(__dirname,propertiesObject.artifactID+"/"+propertiesObject.artifactID+"/pom.xml")
+						var pomDir = path.join(__dirname,"../temp/"+propertiesObject.artifactID+"/"+propertiesObject.artifactID+"/pom.xml")
 						fs.readFile(pomDir, function(readFileError, data) {
 							if(readFileError){
 								callback(readFileError,null)
@@ -144,12 +144,12 @@ function createArtifact(propertiesObject, archetype, zip, callback){
 
 													if(zip){
 														//Zip the artifact
-														zipArchitecture("./"+propertiesObject.artifactID, function(zipError,zipResult){
+														zipArchitecture("../temp/"+propertiesObject.artifactID, function(zipError,zipResult){
 															if(zipError){
 																console.log(zipError,null);
 															}else{
 																//return the artifact
-																callback(null,zipResult)//the .zip file
+																callback(null,zipResult.split('/').pop())//the .zip file
 															}
 														})
 													} else {

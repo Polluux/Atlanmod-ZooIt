@@ -20,20 +20,20 @@ const body = {
 console.log('==== Test of function "createArtifact" ===')
 console.log('Start test ...')
 var error = false
-artifactService.createArtifact(body,function(err,res){
+artifactService.createArtifact(body,"xcore-generation-archetype",true,function(err,res){
 	if(err){
 		console.log("--- [ERROR] An error occured during the execution of the function : \n"+err)
 	}else{
 		console.log("--- [INFO] No error raised, now testing validity of the artifact generated...")
-		if (!fs.existsSync(path.join(__dirname,'../services/monid/monid/src/main/model/Java.xcore'))) {
-			console.log("--- [ERROR] Architecture doesn't seem to be correct (File "+path.join(__dirname,'../services/monid/monid/src/main/model/Java.xcore')+" cannot be accessed.")
+		if (!fs.existsSync(path.join(__dirname,'../temp/monid/monid/src/main/model/Java.xcore'))) {
+			console.log("--- [ERROR] Architecture doesn't seem to be correct (File "+path.join(__dirname,'../temp/monid/monid/src/main/model/Java.xcore')+" cannot be accessed.")
 			error = true
 		}
-		if (!fs.existsSync(path.join(__dirname,'../services/monid/monid/pom.xml'))) {
-			console.log("--- [ERROR] Architecture doesn't seem to be correct (File "+path.join(__dirname,'../services/monid/monid/pom.xml')+" cannot be accessed.")
+		if (!fs.existsSync(path.join(__dirname,'../temp/monid/monid/pom.xml'))) {
+			console.log("--- [ERROR] Architecture doesn't seem to be correct (File "+path.join(__dirname,'../temp/monid/monid/pom.xml')+" cannot be accessed.")
 			error = true
 		}else{
-			var generatedPomBuffer = fs.readFileSync(path.join(__dirname,'../services/monid/monid/pom.xml'))
+			var generatedPomBuffer = fs.readFileSync(path.join(__dirname,'../temp/monid/monid/pom.xml'))
 			var expectedPomBuffer = fs.readFileSync(path.join(__dirname,'/expected_pom.xml'))
 			if(!expectedPomBuffer.equals(generatedPomBuffer)){
 				console.log("--- [ERROR] Well ... seems that the pom generated is a full load of bullshit")
@@ -43,8 +43,8 @@ artifactService.createArtifact(body,function(err,res){
 			}
 		}
 		console.log("--- [INFO] Testing existence of the zip file ...")
-		if (!fs.existsSync(path.join(__dirname,'../services/'+res))) {
-			console.log("--- [ERROR] The zip file doesn't seem to exist at path : "+path.join(__dirname,'../services/'+res))
+		if (!fs.existsSync(path.join(__dirname,'../temp/'+res))) {
+			console.log("--- [ERROR] The zip file doesn't seem to exist at path : "+path.join(__dirname,'../temp/'+res))
 			error = true
 		}else{
 			console.log("--- [INFO] Zip file exists.")
