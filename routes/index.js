@@ -54,7 +54,7 @@ router.post('/', function(req, res, next){
 var githubOAuth = require('github-oauth')({
 	githubClient: '8159ce6e362677e0103d',
 	githubSecret: '2045b4a83a4ace85976601be88508fc5c98422de',
-	baseURL: 'http://localhost:3000',
+	baseURL: 'https://capstone-moulinette.herokuapp.com',
 	loginURI: '/github-oauth',
 	callbackURI: '/form',
 	scope: 'repo',
