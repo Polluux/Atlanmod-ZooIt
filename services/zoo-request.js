@@ -82,9 +82,9 @@ function commitPushPullRequest(username, forkName, token, artifactID, xcoreFile,
         token : token,
         fullyQualifiedRef : "heads/"+branchName,
         files: [
-            { path: artifactID+"/pom.xml", content: fs.readFileSync(__dirname + "/"+artifactID+"/"+artifactID+"/pom.xml", "utf-8") },
-            { path: "pom.xml", content: fs.readFileSync(__dirname + "/"+artifactID+"/pom.xml", "utf-8") },
-            { path: artifactID+"/src/main/model/"+xcoreFile, content: fs.readFileSync(__dirname + "/"+artifactID+"/"+artifactID+"/src/main/model/"+xcoreFile, "utf-8") }
+            { path: artifactID+"/pom.xml", content: fs.readFileSync(path.join(__dirname,"../temp/"+artifactID+"/"+artifactID+"/pom.xml"), "utf-8") },
+            { path: "pom.xml", content: fs.readFileSync(path.join(__dirname,"../temp/"+artifactID+"/pom.xml"), "utf-8") },
+            { path: artifactID+"/src/main/model/"+xcoreFile, content: fs.readFileSync(path.join(__dirname,"../temp/"+artifactID+"/"+artifactID+"/src/main/model/"+xcoreFile), "utf-8") }
             ],        
         forceUpdate: false, // optional default = false
         commitMessage: "Added a new xcore model artifact in the zoo : "+artifactID
@@ -168,7 +168,7 @@ function getPomFromZoo(artifactID, callback){
     request.get(options, (err, res, body) => {
         if (err) { return console.log(err); }  
 
-        var pomPath = path.join(__dirname,artifactID+"/pom.xml");
+        var pomPath = path.join(__dirname,"../temp/",artifactID+"/pom.xml");
         var pomSplit = Buffer.from(body.content, 'base64').toString("utf-8").split("\n")       
 
         var modulesArrayIndex = pomSplit.findIndex(function(element) {

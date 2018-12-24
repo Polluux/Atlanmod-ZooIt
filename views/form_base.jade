@@ -4,7 +4,6 @@ extends layout
 block content
   form#form(action="/zoo-request", method="POST")
     block hiddentoken
-    input(type="hidden", name="githubtoken", value="#{token}")#github-token
     div.section.cutinhalf#section-required
       div.half
         h3 Votre fichier XCore
