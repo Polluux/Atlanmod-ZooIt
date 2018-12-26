@@ -34,6 +34,7 @@ function submit_ajax(form, submit_button){
 
     xhr.open("POST", "/");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.responseType = 'arraybuffer';
 
     // courtesy of https://nehalist.io/downloading-files-from-post-requests/
     //.bind ensures that this inside of the function is the XHR object.
