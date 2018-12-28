@@ -1,5 +1,5 @@
-# Capstone Project Moulinette
-[Deployed on Heroku](http://capstone-moulinette.herokuapp.com/)
+# Capstone Project Atlanmod-Zooit
+[Deployed on Heroku](https://atlanmod-zooit.herokuapp.com/)
 
 ## Install and run
 
@@ -19,7 +19,7 @@ $ DEBUG=* npm start
 ```
 $ npm run start
 ```
-You also can find it [here](http://capstone-moulinette.herokuapp.com/) 
+You also can find it [here](https://atlanmod-zooit.herokuapp.com/) 
 
 ## Code map
 This project is based on the javaScript framework [express](http://www.expressjs.com). 

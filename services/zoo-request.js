@@ -97,7 +97,7 @@ function commitPushPullRequest(username, forkName, token, artifactID, xcoreFile,
                 },
                 json: {
                     "title": "New xcore model artifact : "+artifactID,
-                    "body": "Auto-generated from Moulinette",
+                    "body": "Auto-generated from Atlanmod-Zooit",
                     "head": username+":"+branchName,
                     "base": "master"
                   }
