@@ -40,10 +40,10 @@ function generateMavenArtifact(artifactID, groupID, version, archetype, callback
 		const execSync = require('child_process').execSync;
 		execSync(command, {cwd: path.join(__dirname,"../temp/"+artifactID)}, (e, stdout, stderr)=> {
 			if (e instanceof Error) {	
-				console.error(e);	
+				winstonLogger.error(e);	
 			}		
-			console.log('stdout ', stdout);		
-			console.log('stderr ', stderr);
+			winstonLogger.info('stdout '+ stdout);		
+			winstonLogger.info('stderr '+ stderr);
 		});
 		//TODO : replace the "console.log(error)" into "callback(error)"
 
@@ -147,7 +147,8 @@ function createArtifact(propertiesObject, archetype, zip, callback){
 														//Zip the artifact
 														zipArchitecture("../temp/"+propertiesObject.artifactID, function(zipError,zipResult){
 															if(zipError){
-																console.log(zipError,null);
+																winstonLogger.error(zipError);
+																callback(zipError,null)
 															}else{
 																//return the artifact
 																callback(null,zipResult.split('/').pop())//the .zip file
@@ -156,9 +157,6 @@ function createArtifact(propertiesObject, archetype, zip, callback){
 													} else {
 														callback(null,null)
 													}
-													
-
-													//Execute maven + send to maven repo ???
 								            	}
 			        						})
 								    	}
