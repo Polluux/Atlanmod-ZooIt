@@ -5,4 +5,4 @@ RUN groupadd -r nodejs && useradd -m -r -s /bin/bash -g nodejs nodejs
 RUN npm run initialize
 RUN node tests/test_create_artifact.js
 USER nodejs
-CMD [ "npm", "start" ]
+CMD [ "./run_server.sh" ]
