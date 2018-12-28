@@ -3,6 +3,7 @@ const path = require('path')
 const zipFolder = require('zip-folder')
 const rimraf = require('rimraf')
 const xml2js = require('xml2js')
+const { winstonLogger } = require('./winston_logger.js');
 
 const whitelist_regex = /^([A-Z]|[a-z]|[0-9]|\.|\-)+$/;
 
