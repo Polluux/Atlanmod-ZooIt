@@ -15,17 +15,18 @@ router.get('/', function(req, res, next) {
 router.get('/form', function(req, res, next) {
   return githubOAuth.callback(req, res);
 });
+
 /* GET maven form page. */
 router.get('/form-maven', function(req, res, next) {
   return res.render('form_maven');
 });
 
-
 /* GET manual page. */
-router.get('/manual', function(req, res, next) {
+router.get('/manual', function(req, res) {
   res.render('manual');
 });
 
+/* POST file input */
 router.post('/file', function(req, res, next){
 
 	var form = new formidable.IncomingForm();
@@ -40,6 +41,7 @@ router.post('/file', function(req, res, next){
 
 })
 
+/* POST  maven form */
 router.post('/', function(req, res, next){
 
 	var archetype = "xcore-generation-archetype"
@@ -54,6 +56,8 @@ router.post('/', function(req, res, next){
 	
 })
 
+/* GITHUB API handling */
+
 
 var githubOAuth = require('github-oauth')({
 	githubClient: '8159ce6e362677e0103d',
@@ -64,11 +68,24 @@ var githubOAuth = require('github-oauth')({
 	scope: 'repo',
 })
 
+/* On error */
+githubOAuth.on('error', function (err) {
+	console.error('there was a login error', err);
+	next(err); // !
+})
+
+/* On valid token */
+githubOAuth.on('token', function (token, res) {
+	res.render('form_pr', { token: token.access_token });
+})
+
+/* GET first we auth, then the form will be rendered */
 router.get('/github-oauth', function(req, res){
 	return githubOAuth.login(req, res);
 })
 
-router.post('/zoo-request', function(req, res){		
+/* POST PR form */
+router.post('/zoo-request', function(req, res, next){
 	var archetype = "xcore-generation-archetype-zoo"
 
 	artifactID = req.body.artifactID;
@@ -76,21 +93,11 @@ router.post('/zoo-request', function(req, res){
 
 	artifactService.createArtifact(req.body, archetype, false, function(error,result){
 		if(error){
-			next(error)
+			next(error);
 		}else{
 			zooRequest.requestNewArtifact(req.body.githubtoken, artifactID, filename.split('#')[1] ,function(){});
 		}
 	});
-})
-
-
-
-githubOAuth.on('error', function(err) {
-	console.error('there was a login error', err)
-})
-
-githubOAuth.on('token', function(token, res) {
-	res.render('form_pr', {token:token.access_token});
 })
 
 module.exports = router;
