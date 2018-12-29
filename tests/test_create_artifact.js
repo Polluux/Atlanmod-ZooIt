@@ -25,15 +25,16 @@ artifactService.createArtifact(body,"xcore-generation-archetype",true,function(e
 		console.log("--- [ERROR] An error occured during the execution of the function : \n"+err)
 	}else{
 		console.log("--- [INFO] No error raised, now testing validity of the artifact generated...")
-		if (!fs.existsSync(path.join(__dirname,'../temp/monid/monid/src/main/model/Java.xcore'))) {
-			console.log("--- [ERROR] Architecture doesn't seem to be correct (File "+path.join(__dirname,'../temp/monid/monid/src/main/model/Java.xcore')+" cannot be accessed.")
+		var artifactPath = res.split(".zip")[0]
+		if (!fs.existsSync(path.join(__dirname,'../temp/'+artifactPath+'/monid/src/main/model/Java.xcore'))) {
+			console.log("--- [ERROR] Architecture doesn't seem to be correct (File "+path.join(__dirname,'../temp/'+artifactPath+'/monid/src/main/model/Java.xcore')+" cannot be accessed.")
 			error = true
 		}
-		if (!fs.existsSync(path.join(__dirname,'../temp/monid/monid/pom.xml'))) {
-			console.log("--- [ERROR] Architecture doesn't seem to be correct (File "+path.join(__dirname,'../temp/monid/monid/pom.xml')+" cannot be accessed.")
+		if (!fs.existsSync(path.join(__dirname,'../temp/'+artifactPath+'/monid/pom.xml'))) {
+			console.log("--- [ERROR] Architecture doesn't seem to be correct (File "+path.join(__dirname,'../temp/'+artifactPath+'/monid/pom.xml')+" cannot be accessed.")
 			error = true
 		}else{
-			var generatedPomBuffer = fs.readFileSync(path.join(__dirname,'../temp/monid/monid/pom.xml'))
+			var generatedPomBuffer = fs.readFileSync(path.join(__dirname,'../temp/'+artifactPath+'/monid/pom.xml'))
 			var expectedPomBuffer = fs.readFileSync(path.join(__dirname,'/expected_pom.xml'))
 			if(!expectedPomBuffer.equals(generatedPomBuffer)){
 				console.log("--- [ERROR] Well ... seems that the pom generated is a full load of bullshit")
