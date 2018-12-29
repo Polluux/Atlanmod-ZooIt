@@ -31,7 +31,11 @@ router.post('/file', function(req, res, next){
 	var form = new formidable.IncomingForm();
 
 	form.parse(req, function(err, fields, files){
-		res.send(files.file.path + "#" + files.file.name);
+		if(err){
+			next(err)
+		}else{
+			res.send(files.file.path + "#" + files.file.name);
+		}
 	});
 
 })
@@ -42,7 +46,7 @@ router.post('/', function(req, res, next){
 
 	artifactService.createArtifact(req.body, archetype, true, function(error,result){
 		if(error){
-			res.send('Error :\n'+error)
+			next(error)
 		}else{
 			res.download(path.join(__dirname,"../temp",result),result)
 		}
@@ -72,7 +76,7 @@ router.post('/zoo-request', function(req, res){
 
 	artifactService.createArtifact(req.body, archetype, false, function(error,result){
 		if(error){
-			res.send('Error :\n'+error)
+			next(error)
 		}else{
 			zooRequest.requestNewArtifact(req.body.githubtoken, artifactID, filename.split('#')[1] ,function(){});
 		}
