@@ -8,10 +8,10 @@ const ZOO_REPO = "Polluux/capstoneatlanmodzoosandbox";
 
 
 // Request a new Maven artifact on the AtlanmodZoo Github
-function requestNewArtifact(token, artifactID, xcoreFile, callback){  
+function requestNewArtifact(token, artifactID, folderName, xcoreFile, callback){  
     
     // Retrieve the last pom.xml from the AtlanmodZoo github repository
-    getPomFromZoo(artifactID, function(){    
+    getPomFromZoo(artifactID, folderName, function(){    
 
         // Get the connected user's username
         getUser(token, function(username){
@@ -47,7 +47,7 @@ function requestNewArtifact(token, artifactID, xcoreFile, callback){
                         // Create a new branch on the fork
                         makeNewBranch(token, artifactID, forkName, username, function(branchName){   
                             // Commit, push and make a pull request on the branch                     
-                            commitPushPullRequest(username, forkName,token, artifactID, xcoreFile, branchName);
+                            commitPushPullRequest(username, forkName,token, artifactID, folderName, xcoreFile, branchName);
 
                         });
                     });
@@ -57,7 +57,7 @@ function requestNewArtifact(token, artifactID, xcoreFile, callback){
                     // Create a new branch
                     makeNewBranch(token, artifactID, forkName, username, function(branchName){ 
                         // Commit, push and make a pull request on the branch
-                        commitPushPullRequest(username, forkName,token, artifactID, xcoreFile, branchName);
+                        commitPushPullRequest(username, forkName,token, artifactID, folderName, xcoreFile, branchName);
                     });
                 } 
             });       
@@ -85,7 +85,7 @@ function getUser(token, callback){
 }
 
 // Perform a CommitPush of the artifact on the new fork's branch and the pull request from the user's fork to the AtlanmodZoo repository
-function commitPushPullRequest(username, forkName, token, artifactID, xcoreFile, branchName){
+function commitPushPullRequest(username, forkName, token, artifactID, folderName, xcoreFile, branchName){
 
     // Perform a the commit and push action on the user's branch for the artifact
     gitCommitPush({
@@ -94,9 +94,9 @@ function commitPushPullRequest(username, forkName, token, artifactID, xcoreFile,
         token : token,
         fullyQualifiedRef : "heads/"+branchName,
         files: [
-            { path: artifactID+"/pom.xml", content: fs.readFileSync(path.join(__dirname,"../temp/"+artifactID+"/"+artifactID+"/pom.xml"), "utf-8") },
-            { path: "pom.xml", content: fs.readFileSync(path.join(__dirname,"../temp/"+artifactID+"/pom.xml"), "utf-8") },
-            { path: artifactID+"/src/main/model/"+xcoreFile, content: fs.readFileSync(path.join(__dirname,"../temp/"+artifactID+"/"+artifactID+"/src/main/model/"+xcoreFile), "utf-8") }
+            { path: artifactID+"/pom.xml", content: fs.readFileSync(path.join(__dirname,folderName+"/"+artifactID+"/pom.xml"), "utf-8") },
+            { path: "pom.xml", content: fs.readFileSync(path.join(__dirname,folderName+"/pom.xml"), "utf-8") },
+            { path: artifactID+"/src/main/model/"+xcoreFile, content: fs.readFileSync(path.join(__dirname,folderName+"/"+artifactID+"/src/main/model/"+xcoreFile), "utf-8") }
             ],        
         forceUpdate: false, // optional default = false
         commitMessage: "Added a new xcore model artifact in the zoo : "+artifactID
@@ -168,7 +168,7 @@ function makeNewBranch(token, artifactID, forkName, username, callback){
 
 
 // Get the last updated pom.xml from the AtlanmodZoo repository
-function getPomFromZoo(artifactID, callback){
+function getPomFromZoo(artifactID, folderName, callback){
 
     var options = {
         url: API_URL+'/repos/'+ZOO_REPO+'/contents/pom.xml',
@@ -183,14 +183,16 @@ function getPomFromZoo(artifactID, callback){
     request.get(options, (err, res, body) => {
         if (err) { return console.log(err); }  
 
-        var pomPath = path.join(__dirname,"../temp/",artifactID+"/pom.xml");
+        var pomPath = path.join(__dirname,folderName+"/pom.xml");
         var pomSplit = Buffer.from(body.content, 'base64').toString("utf-8").split("\n")       
 
         var modulesArrayIndex = pomSplit.findIndex(function(element) {
-            return element == '    </modules>';
+            return element.includes('</modules>');
         });
 
-        pomSplit.splice(modulesArrayIndex, 0, "        <module>"+artifactID+"</module>");
+        var moduleSpacing = pomSplit[modulesArrayIndex-1].search('<');
+
+        pomSplit.splice(modulesArrayIndex, 0, pomSplit[modulesArrayIndex-1].substring(0,moduleSpacing)+"<module>"+artifactID+"</module>");
         var text = pomSplit.join("\n");
 
         fs.writeFile(pomPath, text, function (err) {

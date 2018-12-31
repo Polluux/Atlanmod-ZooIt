@@ -95,7 +95,7 @@ router.post('/zoo-request', function(req, res, next){
 		if(error){
 			next(error);
 		}else{
-			zooRequest.requestNewArtifact(req.body.githubtoken, artifactID, filename.split('#')[1] ,function(){});
+			zooRequest.requestNewArtifact(req.body.githubtoken, artifactID, result, filename.split('#')[1] ,function(){});
 		}
 	});
 })

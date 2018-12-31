@@ -70,7 +70,7 @@ function zipArchitecture(dirPath, callback){
 function createArtifact(propertiesObject, archetype, zip, callback){
 	//Check validity of the artifactID, to prevent a name such as "../artifact" which would cause issues
 	if(!whitelist_regex.test(propertiesObject.artifactID)){
-		callback("Error, you tried interring an unauthorized character...",null)
+		callback("Error, you entered an unauthorized character...",null)
 	}else{
 
 		var d = new Date()
@@ -161,7 +161,7 @@ function createArtifact(propertiesObject, archetype, zip, callback){
 															}
 														})
 													} else {
-														callback(null,null)
+														callback(null,"../temp/"+timestamp+'_'+propertiesObject.artifactID)
 													}
 								            	}
 			        						})
