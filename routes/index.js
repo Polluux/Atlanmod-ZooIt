@@ -56,8 +56,8 @@ router.post('/', function(req, res, next){
 	
 })
 
-/* GITHUB API handling */
 
+/* GITHUB API handling */
 
 var githubOAuth = require('github-oauth')({
 	githubClient: '8159ce6e362677e0103d',

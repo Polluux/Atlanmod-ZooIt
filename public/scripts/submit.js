@@ -4,7 +4,6 @@ function submit_form(form, submit_button){
     }
     submit_button.classList.add('spinning');
     form.submit();
-    submit_button.classList.remove('spinning');
 }
 
 function submit_ajax(form, submit_button){
