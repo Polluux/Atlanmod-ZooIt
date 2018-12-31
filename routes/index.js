@@ -71,7 +71,8 @@ var githubOAuth = require('github-oauth')({
 /* On error */
 githubOAuth.on('error', function (err) {
 	console.error('there was a login error', err);
-	next(err); // !
+	res.status(err.status || 500);
+  	res.render('error');
 })
 
 /* On valid token */
@@ -95,9 +96,12 @@ router.post('/zoo-request', function(req, res, next){
 		if(error){
 			next(error);
 		}else{
-			zooRequest.requestNewArtifact(req.body.githubtoken, artifactID, result, filename.split('#')[1] ,function(error){
+			zooRequest.requestNewArtifact(req.body.githubtoken, artifactID, result, filename.split('#')[1] ,function(pr_url, error){
 				if(error){
 					next(error);
+				}
+				else{
+					res.redirect(pr_url);
 				}
 			});
 		}

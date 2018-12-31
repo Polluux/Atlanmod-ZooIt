@@ -13,11 +13,11 @@ function requestNewArtifact(token, artifactID, folderName, xcoreFile, callback){
     
     // Retrieve the last pom.xml from the AtlanmodZoo github repository
     getPomFromZoo(artifactID, folderName, function(err){           
-        if(err){ callback(err); }
+        if(err){ callback(null, err); }
 
         // Get the connected user's username
         getUser(token, function(username, err){          
-            if(err){ callback(err); }
+            if(err){ callback(null, err); }
 
             var options = {
                 url: API_URL+'/repos/'+ZOO_REPO+'/forks?access_token='+token,
@@ -30,14 +30,14 @@ function requestNewArtifact(token, artifactID, folderName, xcoreFile, callback){
             request(options, (err, res, body) => {
                 if (err) { 
                     winstonLogger.error(err);
-                    callback("Unable to retrieve AtlanmodZoo fork list.");
+                    callback(null, "Unable to retrieve AtlanmodZoo fork list.");
                 }
 
                 var forkExists = false;
                 var forkName = null;
                 
                 if(JSON.parse(body).message)
-                    callback("Unable to access AtlanmodZoo fork : "+JSON.parse(body).message)
+                    callback(null, "Unable to access AtlanmodZoo fork : "+JSON.parse(body).message)
                 else{    
 
                     JSON.parse(body).forEach(function(element){
@@ -53,17 +53,18 @@ function requestNewArtifact(token, artifactID, folderName, xcoreFile, callback){
                         request.post(options, (err, res, body) => {
                             if (err) { 
                                 winstonLogger.error(err);
-                                callback("Unable to create a fork for the current user.");
+                                callback(null, "Unable to create a fork for the current user.");
                             }
 
                             forkName = JSON.parse(body).source.name;
 
                             // Create a new branch on the fork
                             makeNewBranch(token, artifactID, forkName, username, function(branchName, err){   
-                                if(err){ callback(err); }
+                                if(err){ callback(null, err); }
                                 // Commit, push and make a pull request on the branch                     
-                                commitPushPullRequest(username, forkName,token, artifactID, folderName, xcoreFile, branchName, function(err){
-                                    if(err){ callback(err); }
+                                commitPushPullRequest(username, forkName,token, artifactID, folderName, xcoreFile, branchName, function(pr_url, err){
+                                    if(err){ callback(null, err); }
+                                    callback(pr_url, null);
                                 });
 
                             });
@@ -73,17 +74,16 @@ function requestNewArtifact(token, artifactID, folderName, xcoreFile, callback){
                     else{
                         // Create a new branch
                         makeNewBranch(token, artifactID, forkName, username, function(branchName, err){ 
-                            if(err){ callback(err); }
+                            if(err){ callback(null, err); }
                             // Commit, push and make a pull request on the branch
-                            commitPushPullRequest(username, forkName,token, artifactID, folderName, xcoreFile, branchName, function(err){
-                                if(err){ callback(err); }                          
+                            commitPushPullRequest(username, forkName,token, artifactID, folderName, xcoreFile, branchName, function(pr_url, err){
+                                if(err){ callback(null, err); }   
+                                callback(pr_url, null);                       
                             });
                         });
                     } 
                 }
             });       
-
-            callback(null);
                 
         });
 
@@ -144,14 +144,14 @@ function commitPushPullRequest(username, forkName, token, artifactID, folderName
         request.post(options, (err, res, body) => {
             if (err) { 
                 winstonLogger.error(err);
-                callback("Unable to perform the pull request from user's fork to AtlanmodZoo repository.");
-             }                   
+                callback(null, "Unable to perform the pull request from user's fork to AtlanmodZoo repository.");
+            }
+            callback(body.html_url,null);               
         })
     }).catch(err => {
         winstonLogger.error(err);
-        callback("Unable to perform the commit and push on the user's fork.");
+        callback(null, "Unable to perform the commit and push on the user's fork.");
     });
-    callback(null);
 }
 
 
