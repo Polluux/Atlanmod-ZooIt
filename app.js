@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan'); //Is this still necessary ?
 var { winstonLogger } = require('./services/winston_logger.js'); //The new logger
+var i18n = require("i18n-express"); // <-- require the module
 
 var indexRouter = require('./routes/index');
 
@@ -20,6 +21,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// i18n
+app.use(i18n({
+  translationsPath: path.join(__dirname, 'i18n'),
+  siteLangs: ["en", "fr"],
+  textsVarName: '_' // how to access i18n in views
+}));
 
 app.use('/', indexRouter);
 

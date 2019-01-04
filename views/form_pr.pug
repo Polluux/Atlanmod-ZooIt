@@ -9,10 +9,10 @@ block hiddentoken
 block submit
   div.section#section-submit
     div.submit_button#submit_pr
-      span Faire une PR du zoo
+      span= _.FORM.BUTTON_PR
       img(src="/img/spinner.png")
 
-    p#operation_time(style='display:none') L'opération peut prendre jusqu'à deux minute
+    p#operation_time(style='display:none') _.FORM.OPERATION
 
 block scripts 
   script.

@@ -4,11 +4,11 @@ extends form_base
 block requiredfields
   label.field
     input(type="text", name="groupID", required, pattern="[A-Za-z0-9.-]+").field_field
-    div.field_description Groupe de l'artefact (Ex : com.company.project)
+    div.field_description= _.FORM.FIELD.GROUP
 
   label.field
     input(type="text", name="version", required, pattern="[A-Za-z0-9.-]+").field_field
-    div.field_description Version de l'artefact (Ex : 1.0.0)
+    div.field_description= _.FORM.FIELD.VERSION
 
   // For now, we do not deploy on Maven Central
   //label.field
@@ -18,50 +18,50 @@ block requiredfields
 block otherfields
   div.section#section-maven
 
-      h3 Champs nécessaires pour déployer sur le Central
-      p Pour plus de détails, voir #[a(href="https://central.sonatype.org/pages/requirements.html", target="_blank") la documentation].
+      h3= _.FORM.SECTION.CENTRAL
+      p !{_.FORM.SECTION.CENTRAL_INFO}
 
       div.content
         label.field
           input(type="text", name="artifactName").field_field.mvn_required
-          div.field_description Nom de l'artefact à générer
+          div.field_description= _.FORM.FIELD.NAME
 
         label.field
           input(type="text", name="artifactDescription").field_field.mvn_required
-          div.field_description Description de l'artefact
+          div.field_description= _.FORM.FIELD.DESCRIPTION
 
         label.field
           input(type="url", name="artifactURL").field_field.mvn_required
-          div.field_description URL du projet
+          div.field_description= _.FORM.FIELD.URL
 
         label.field.large
           textarea#textarea_developpers(name="developers", spellcheck="false").field_field.mvn_required
-          div.field_description developpeurs 
+          div.field_description= _.FORM.FIELD.DEVELOPERS
 
         label.field.large
           textarea#textarea_scm(name="scm", spellcheck="false").field_field.mvn_required
-          div.field_description versionnement
+          div.field_description= _.FORM.FIELD.SCM
 
   div.section#section-optionnal
 
-      h3 Champs optionnels
+      h3= _.FORM.SECTION.OPTIONAL
 
       div.content
 
         label.field.large
           input(type="text", name="organization").field_field
-          div.field_description Organisation 
+          div.field_description= _.FORM.FIELD.ORGANIZATION
 
         label.field.large
           input(type="text", name="year", pattern="[0-9]{4}").field_field
-          div.field_description Année de création
+          div.field_description= _.FORM.FIELD.YEAR
 
 block submit
   div.section#section-submit
     div.submit_button#submit_artifact
-      span Télécharger l'artefact Maven
+      span= _.FORM.BUTTON_MAVEN
       img(src="/img/spinner.png")
-    p#operation_time(style='display:none') L'opération peut prendre jusqu'à une minute
+    p#operation_time(style='display:none')= _.FORM.OPERATION
 
 block scripts 
   script(type="text/javascript", src="/scripts/form.js")

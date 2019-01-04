@@ -1,0 +1,44 @@
+{
+    "BUTTONS": {
+        "BUTTON_FORM_MAVEN": "Automated",
+        "BUTTON_FORM_MAVEN_TITLE": "Go to form",
+        "BUTTON_MANUEL": "Handbook",
+        "BUTTON_MANUEL_TITLE": "Handbook",
+        "BUTTON_PR": "Authenticate on GitHub and do my pull request",
+        "BUTTON_PR_TITLE": "Go to form after authenticate"
+    },
+    "HOME_WORDING": {
+        "INTRO": "Zoo it! is a free service by and for the <a href='https://www.ls2n.fr/', title='Laboratoire des Sciences du Numérique de Nantes', target='_blank'> LS2N</a> in ordrer to repopulate the <a href='http://web.imt-atlantique.fr/x-info/atlanmod/index.php?title=Zoos', title='Atlanmod Zoos', target='_blank'> zoo</a>.",
+        "SECTION_MAVEN_TITLE": "Transform your <em>XCore</em> file into <em>Maven artifacts</em>.",
+        "SECTION_MAVEN_INTRO": "Do easily the conversion with our tool or read the handbook for a step-to-step formula.",
+        "SECTION_PR_TITLE": "Do effortlessly your <a href='https://github.com/atlanmod/zoo', title='Atlanmod Zoo on GitHub', target='_blank'> zoo</a> <em>pull request</em>."
+    },
+    "ERROR": {
+        "TITLE": "You encountered an error",
+        "HOME_LINK": "Go back to home page and try again."
+    },
+    "FORM": {
+        "SECTION": {
+            "FILE": "Your XCore file",
+            "MANDATORY": "Mandatory fields",
+            "CENTRAL": "Mandatory fields to deploy on Maven Central",
+            "CENTRAL_INFO": "For more info, see <a href='https://central.sonatype.org/pages/requirements.html', target='_blank'> the documentation</a>.",
+            "OPTIONAL": "Optionnal fields"
+        },
+        "FIELD": {
+            "ID": "Artifact ID",
+            "GROUP": "Artifact group (Ex : com.company.project)",
+            "VERSION": "Artifact version (Ex : 1.0.0)",
+            "NAME": "Artifact name",
+            "DESCRIPTION": "Artifact description",
+            "URL": "Project URL",
+            "DEVELOPERS": "Developers",
+            "SCM": "Versionning",
+            "ORGANIZATION": "Organization",
+            "YEAR": "Creation year"
+        },
+        "BUTTON_PR": "Do the Zoo PR",
+        "BUTTON_MAVEN": "Download the Maven artifact",
+        "OPERATION": "The operation can take up to two minutes."
+    }
+}
