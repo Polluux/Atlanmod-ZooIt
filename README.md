@@ -78,7 +78,12 @@ Here is a list of parameters you can use (NOTE : some of the parameters are mand
  - -developers (Not implemented yet)
  - -scm (Not implemented yet)
 
-Once the script is started, it asks you to fill in the informations that you didn't mentionned in the command line. Optional informations can be skiped by simply typing enter.
+Here is an exemple of utilisation of the script :
+```
+$ node prompt_script.js /home/user/Documents/File.xcore -artifactName=MyArtifact -artifactDescription="This is a description."
+```
+
+Once the script is started, it asks you to fill in the informations that you didn't mentionned in the command line. Optional informations can be skiped by simply typing enter. If an information is mentionned to be filled but you already pre-filled it, it means it was not correct.
 
 The artifact generated is zipped and located in the `/temp` directory with the name : `<timestamp>_<artifactID>.zip`. (The full name is given by the script at the end of the execution).
 
