@@ -12,5 +12,9 @@
         "SECTION_MAVEN_TITLE": "Transform your <em>XCore</em> file into <em>Maven artifacts</em>.",
         "SECTION_MAVEN_INTRO": "Do easily the conversion with our tool or read the handbook for a step-to-step formula.",
         "SECTION_PR_TITLE": "Do effortlessly your <a href='https://github.com/atlanmod/zoo', title='Atlanmod Zoo on GitHub', target='_blank'> zoo</a> <em>pull request</em>."
+    },
+    "ERROR": {
+        "TITLE": "You encountered an error",
+        "HOME_LINK": "Go back to home page and try again."
     }
 }
