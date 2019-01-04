@@ -5,8 +5,9 @@ const readline = require('readline')
 
 const regex_XCORE = /^.*\.xcore+$/
 const regex_property_parameter = /^-([A-Z]|[a-z]|[0-9]|\.|\-)+=([A-Z]|[a-z]|[0-9]|\.|\-)+$/
+const regex_alternative_property_parameter = /^-([A-Z]|[a-z]|[0-9]|\.|\-)+=.*$/ //This is used for optional properties, "a property" is transformed to : a property (" are suppressed at the execution) 
 const regex_valid_property = /^([A-Z]|[a-z]|[0-9]|\.|\-)+$/
-const regex_valid_optional_property = /^([A-Z]|[a-z]|[0-9]|\.|\-)*$/ //Note the * instead of +
+const regex_valid_optional_property = /^(([A-Z]|[a-z]|[0-9]|\.|\-)*|".*")$/ //Note the * instead of +
 
 const list_required_properties = ["artifactID","groupID","version"]
 const list_facultative_properties = ["artifactName","artifactDescription","artifactURL","year","organization"]
@@ -56,6 +57,8 @@ process.argv.forEach(function (val, index, array) {
 	if(index>2){
 		if(regex_property_parameter.test(val)){
 			params[val.split('=')[0].substring(1)] = val.split('=')[1]
+		}else if(regex_alternative_property_parameter.test(val)){ //If there is spaces in the value, only allowed for facultative properties
+			if(list_facultative_properties.includes(val.split('=')[0].substring(1))) params[val.split('=')[0].substring(1)] = val.substring(val.indexOf('=')+1)
 		}
 	}
 })
@@ -98,6 +101,7 @@ async function fillParameters(callback){
 				i--
 			})
 			if(params[list_facultative_properties[i]] == '') delete params[list_facultative_properties[i]]
+			if(/^".*"$/.test(params[list_facultative_properties[i]])) params[list_facultative_properties[i]] = params[list_facultative_properties[i]].substring(1,params[list_facultative_properties[i]].length -1)
 		}
 	} 
 
