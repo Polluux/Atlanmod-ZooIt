@@ -16,5 +16,29 @@
     "ERROR": {
         "TITLE": "You encountered an error",
         "HOME_LINK": "Go back to home page and try again."
+    },
+    "FORM": {
+        "SECTION": {
+            "FILE": "Your XCore file",
+            "MANDATORY": "Mandatory fields",
+            "CENTRAL": "Mandatory fields to deploy on Maven Central",
+            "CENTRAL_INFO": "For more info, see <a href='https://central.sonatype.org/pages/requirements.html', target='_blank'> the documentation</a>.",
+            "OPTIONAL": "Optionnal fields"
+        },
+        "FIELD": {
+            "ID": "Artifact ID",
+            "GROUP": "Artifact group (Ex : com.company.project)",
+            "VERSION": "Artifact version (Ex : 1.0.0)",
+            "NAME": "Artifact name",
+            "DESCRIPTION": "Artifact description",
+            "URL": "Project URL",
+            "DEVELOPERS": "Developers",
+            "SCM": "Versionning",
+            "ORGANIZATION": "Organization",
+            "YEAR": "Creation year"
+        },
+        "BUTTON_PR": "Do the Zoo PR",
+        "BUTTON_MAVEN": "Download the Maven artifact",
+        "OPERATION": "The operation can take up to two minutes."
     }
 }

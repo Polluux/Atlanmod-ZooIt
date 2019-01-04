@@ -1,21 +1,44 @@
 {
-    "BUTTONS":{
-        "BUTTON_FORM_MAVEN" : "Automatique",
-        "BUTTON_FORM_MAVEN_TITLE": "Aller au formulaire",
-        "BUTTON_MANUEL" : "Manuel",
-        "BUTTON_MANUEL_TITLE": "Manuel",
-        "BUTTON_PR": "M'identifier sur GitHub et faire ma pull request",
-        "BUTTON_PR_TITLE": "Aller au formulaire après authentifiaction"
+  "BUTTONS": {
+    "BUTTON_FORM_MAVEN": "Automatique",
+    "BUTTON_FORM_MAVEN_TITLE": "Aller au formulaire",
+    "BUTTON_MANUEL": "Manuel",
+    "BUTTON_MANUEL_TITLE": "Manuel",
+    "BUTTON_PR": "M'identifier sur GitHub et faire ma pull request",
+    "BUTTON_PR_TITLE": "Aller au formulaire après authentifiaction"
+  },
+  "HOME_WORDING": {
+    "INTRO": "Zoo it! est un service gentillement proposé par et pour le <a href='https://www.ls2n.fr/', title='Laboratoire des Sciences du Numérique de Nantes', target='_blank'> LS2N</a> dans le but de repeupler le <a href='http://web.imt-atlantique.fr/x-info/atlanmod/index.php?title=Zoos', title='Atlanmod Zoos', target='_blank'> zoo</a>.",
+    "SECTION_MAVEN_TITLE": "Transformez vos fichiers <em>XCore</em> en <em>artefact Maven</em>.",
+    "SECTION_MAVEN_INTRO": "Faites la conversion facilement avec notre outil ou lisez le manuel pour le faire pas à pas.",
+    "SECTION_PR_TITLE": "Faites votre <em> pull request</em> vers le <a href='https://github.com/atlanmod/zoo',  title='Atlanmod Zoo sur Github' target='_blank'> zoo</a> sans prise de tête."
+  },
+  "ERROR": {
+    "TITLE": "Vous avez rencontré une erreur",
+    "HOME_LINK": "Retournez à l'acceuil et réessayez."
+  },
+  "FORM": {
+    "SECTION": {
+      "FILE": "Votre fichier XCore",
+      "MANDATORY": "Champs obligatoires",
+      "CENTRAL": "Champs nécessaires pour déployer sur le Central",
+      "CENTRAL_INFO": "Pour plus de détails, voir <a href='https://central.sonatype.org/pages/requirements.html', target='_blank'> la documentation</a>.",
+      "OPTIONAL": "Champs optionnels"
     },
-
-    "HOME_WORDING" :{
-        "INTRO" : "Zoo it! est un service gentillement proposé par et pour le <a href='https://www.ls2n.fr/', title='Laboratoire des Sciences du Numérique de Nantes', target='_blank'> LS2N</a> dans le but de repeupler le <a href='http://web.imt-atlantique.fr/x-info/atlanmod/index.php?title=Zoos', title='Atlanmod Zoos', target='_blank'> zoo</a>.",
-        "SECTION_MAVEN_TITLE" : "Transformez vos fichiers <em>XCore</em> en <em>artefact Maven</em>.",
-        "SECTION_MAVEN_INTRO" : "Faites la conversion facilement avec notre outil ou lisez le manuel pour le faire pas à pas.",
-        "SECTION_PR_TITLE" : "Faites votre <em> pull request</em> vers le <a href='https://github.com/atlanmod/zoo',  title='Atlanmod Zoo sur Github' target='_blank'> zoo</a> sans prise de tête."
+    "FIELD": {
+      "ID": "ID de l'artefact",
+      "GROUP": "Groupe de l'artefact (Ex : com.company.project)",
+      "VERSION": "Version de l'artefact (Ex : 1.0.0)",
+      "NAME": "Nom de l'artefact",
+      "DESCRIPTION": "Description de l'artefact",
+      "URL": "URL du projet",
+      "DEVELOPERS": "Développeurs",
+      "SCM": "Versionnement",
+      "ORGANIZATION": "Organisation",
+      "YEAR": "Année de création"
     },
-    "ERROR": {
-      "TITLE": "Vous avez rencontré une erreur",
-      "HOME_LINK": "Retournez à l'acceuil et réessayez."
-    }
+    "BUTTON_PR": "Faire une PR du zoo",
+    "BUTTON_MAVEN": "Télécharger l'artefact Maven",
+    "OPERATION": "L'opération peut prendre jusqu'à deux minutes."
+  }
 }
