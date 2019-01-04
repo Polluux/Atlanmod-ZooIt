@@ -27,7 +27,7 @@ This project is based on the platform [Node.js](https://nodejs.org/en/) and is u
 
 The artefact generation is using Maven with two different `Maven archetypes` (a classic artefact archetype and a zoo request artefact archetype).
 
-The application is containerized with a minimal Ubuntu image containing Java, Maven, Node.js and NPM (based on the image [jimador/docker-jdk-8-maven-node](https://hub.docker.com/r/jimador/docker-jdk-8-maven-node/))
+The application is containerized with Docker with a minimal Ubuntu image containing Java, Maven, Node.js and NPM (based on the image [jimador/docker-jdk-8-maven-node](https://hub.docker.com/r/jimador/docker-jdk-8-maven-node/))
 
 ### Code map of the project
 Starting from `/`, the project is organised as follows :
@@ -36,6 +36,7 @@ Starting from `/`, the project is organised as follows :
  - `maven_archetype/` and `maven_archetype_zoo/` : maven archetypes used to generate the new maven artefacts
  - `views/` : templates, written using [pug](https://pugjs.org/). 
  - `public/` : template assets, including pictures, js scripts, css stylesheets and librairies
+ - `i18n/` : english and french translations, as json files
  - `node_modules/` and  `bin/` : generated and managed by the framework  
  - `logs` : folder for the server logs
  - `.m2` : maven prebuilt archetype catalog for container deployment
