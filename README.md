@@ -55,6 +55,7 @@ The process to automatically generate a Maven artefact from an XCore, requires y
 
 ## Local automatic artefact generation process :
 There is also a way to generate an artefac without using the web application going through a script.
+
 NOTE : NodeJS must be installed on the computer and the installation of the application must have been completed (see above in the section `Installation`).
 
 This script is located in the `services/` directory, named `prompt_script.js` and is used as follow :
@@ -62,7 +63,9 @@ This script is located in the `services/` directory, named `prompt_script.js` an
 $ node prompt_script.js <file.xcore> [-parameter=value]*
 ```
 **<file.xcore>** : is a relative or absolute path to the file.xcore to be transformed.
+
 **[-parameter=value]\*** : is a list of parameters which can be passed to pre-fill the atributes of the artifact to be generated.
+
 Here is a list of parameters you can use (NOTE : some of the parameters are mandatory and you will need to fill them afterward) :
  - -artifactID
  - -groupID
@@ -74,9 +77,10 @@ Here is a list of parameters you can use (NOTE : some of the parameters are mand
  - -organization
  - -developers (Not implemented yet)
  - -scm (Not implemented yet)
-Once the script is started, it asks you to fill in the informations that you didn't mentionned in the command line. Optional informations can be skiped by simply typing enter.
-The artifact generated is zipped and located in the `/temp` directory with the name : `<timestamp>_<artifactID>.zip`. (The full name is given by the script at the end of the execution).
 
+Once the script is started, it asks you to fill in the informations that you didn't mentionned in the command line. Optional informations can be skiped by simply typing enter.
+
+The artifact generated is zipped and located in the `/temp` directory with the name : `<timestamp>_<artifactID>.zip`. (The full name is given by the script at the end of the execution).
 
 
 ## AtlanmodZoo : Github artifact request process :
