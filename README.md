@@ -55,17 +55,17 @@ The process to automatically generate a Maven artefact from an XCore, requires y
 - Generate and download your artefact (the process can take multiple seconds)
 
 ## Local automatic artefact generation process :
-There is also a way to generate an artefac without using the web application going through a script.
+The project also includes a way to generate an artefact without using the web application going through a script.
 
-NOTE : NodeJS must be installed on the computer and the installation of the application must have been completed (see above in the section `Installation`).
+NOTE : Node.js must be installed on the computer and the installation of the application must have been completed (see above in the section `Installation`).
 
-This script is located in the `services/` directory, named `prompt_script.js` and is used as follow :
+The local generation script is located in the `services/` directory, is named `prompt_script.js` and is used with the following command :
 ```
 $ node prompt_script.js <file.xcore> [-parameter=value]*
 ```
 **<file.xcore>** : is a relative or absolute path to the file.xcore to be transformed.
 
-**[-parameter=value]\*** : is a list of parameters which can be passed to pre-fill the atributes of the artifact to be generated.
+**[-parameter=value]\*** : is a list of parameters which can be passed to pre-fill the attributes of the artifact to be generated.
 
 Here is a list of parameters you can use (NOTE : some of the parameters are mandatory and you will need to fill them afterward) :
  - -artifactID
@@ -79,14 +79,14 @@ Here is a list of parameters you can use (NOTE : some of the parameters are mand
  - -developers (Not implemented yet)
  - -scm (Not implemented yet)
 
-Here is an exemple of utilisation of the script :
+Here is an exemple of the script utilization :
 ```
 $ node prompt_script.js /home/user/Documents/File.xcore -artifactName=MyArtifact -artifactDescription="This is a description."
 ```
 
-Once the script is started, it asks you to fill in the informations that you didn't mentionned in the command line. Optional informations can be skiped by simply typing enter. If an information is mentionned to be filled but you already pre-filled it, it means it was not correct.
+Once the script is started, it will asks you to fill the information that you didn't mentioned in the command line. Optional information can be skipped by simply typing enter. If an information is mentioned to be filled but you already pre-filled it, it means it was incorrect.
 
-The artifact generated is zipped and located in the `/temp` directory with the name : `<timestamp>_<artifactID>.zip`. (The full name is given by the script at the end of the execution).
+The artifact generated is zipped and located in the `/temp` directory with the name : `<timestamp>_<artifactID>.zip` (fhe full name is given by the script at the end of the execution).
 
 
 ## AtlanmodZoo : Github artifact request process :
