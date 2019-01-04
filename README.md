@@ -5,8 +5,8 @@
 
 ### Installation 
 ```
-$ git clone https://github.com/Polluux/Capstone_Moulinette
-$ cd Capstone_Moulinette
+$ git clone https://github.com/Polluux/Atlanmod-ZooIt
+$ cd Atlanmod-ZooIt
 $ npm run initialize
 ```
 
@@ -15,21 +15,43 @@ $ npm run initialize
 $ DEBUG=* npm start
 ```
 
-### Start the application
+### Start the local application
 ```
 $ npm run start
 ```
-You also can find it [here](https://atlanmod-zooit.herokuapp.com/) 
+You also can find the online version of it [here](https://atlanmod-zooit.herokuapp.com/) 
 
-## Code map
-This project is based on the javaScript framework [express](http://www.expressjs.com). 
-Starting from `/`, the project is organised as follow :
- - `routes/index.js` : the router
- - `services/` : the js scripts called to execute services
- - `maven_archetype/` and `maven_archetype/` : the maven artefact template we use
- - `views/` : templates, written using [jade](http://jade-lang.com/). 
+## Technologies and Code map
+### Technologies used in the project
+This project is based on the platform [Node.js](https://nodejs.org/en/) and is using the JavaScript framework [express](http://www.expressjs.com). 
+
+The artefact generation is using Maven with two different `Maven archetypes` (a classic artefact archetype and a zoo request artefact archetype).
+
+The application is containerized with a minimal Ubuntu image containing Java, Maven, Node.js and NPM (based on the image [jimador/docker-jdk-8-maven-node](https://hub.docker.com/r/jimador/docker-jdk-8-maven-node/))
+
+### Code map of the project
+Starting from `/`, the project is organised as follows :
+ - `routes/index.js` : url routing file for the website
+ - `services/` : js scripts called to execute services (artefact generation, github process, ...)
+ - `maven_archetype/` and `maven_archetype_zoo/` : maven archetypes used to generate the new maven artefacts
+ - `views/` : templates, written using [pug](https://pugjs.org/). 
  - `public/` : template assets, including pictures, js scripts, css stylesheets and librairies
- - `node_modules/` et  `bin/` : generated and managed by the framework  
+ - `node_modules/` and  `bin/` : generated and managed by the framework  
+ - `logs` : folder for the server logs
+ - `.m2` : maven prebuilt archetype catalog for container deployment
+ - `temp` : temporary folder that contains generated artefacts
+ - `tests` : testing process for artefact generation
+
+## Online automatic artefact generation process :
+The main goal of Atlanmod-Zooit is to provide an automatic online process to generate a complete maven artefact for an EMF XCore model. The generated artefact is able to generate the source code of the model and can be easily built to be deployed on the Maven Central Repository. The generation process is based on *maven archetypes*. 
+
+The process to automatically generate a Maven artefact from an XCore, requires you to :
+- Connect to the Atlanmod-Zooit website (https://atlanmod-zooit.herokuapp.com/)
+- Choose the **Automatic** generation of artefact based on an XCore model
+- Upload the XCore file containing your model
+- Fill all required fields.
+- *Optional* : fill the maven deployment required fields and the other optional fields
+- Generate and download your artefact (the process can take multiple seconds)
 
 ## AtlanmodZoo : Github artifact request process :
 Atlanmod-Zooit can perform an automatic request to add a newly generated artifact to the AtlanmodZoo Github repository (accessible at this [link](https://github.com/atlanmod/zoo)). The generation process to perform a request on the Zoo is different from the generation process of a standalone artifact and it requires the user to be authenticated with a Github account. The complete process uses the official Github REST API (available [here](https://developer.github.com/v3/)) and is discribed as follows :
