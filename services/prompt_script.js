@@ -20,7 +20,7 @@ const rl = readline.createInterface({
 // Test inputs
 
 if(process.argv.length < 3){
-	console.log('--- [INFO] Usage : node prompt_script.js <file.xcore> [parameter=value]* \n Parameters such as : \n')
+	console.log('--- [INFO] Usage : node prompt_script.js <file.xcore> [-parameter=value]* \n Parameters such as : \n')
 	list_required_properties.forEach(function(val){
 		console.log('\t-'+val+'=<'+val+'>')
 	})
