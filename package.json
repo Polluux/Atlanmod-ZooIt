@@ -20,6 +20,7 @@
     "github-oauth": "0.2.2",
     "git-commit-push-via-github-api": "1.0.1",
     "winston": "3.1.0",
-    "winston-daily-rotate-file": "3.5.1"
+    "winston-daily-rotate-file": "3.5.1",
+    "i18n-express": "1.1.3"
   }
 }
