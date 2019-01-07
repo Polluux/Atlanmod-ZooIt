@@ -3,4 +3,40 @@ extends layout
 
 block content
 
-  h1 Créer un artefact Maven à partir d'un fichier XCore
+  h1= _.HANDBOOK.TITLE
+  
+  h2= _.HANDBOOK.TITLE_REQS
+  ul
+    li= _.HANDBOOK.REQS_LIST.XCORE
+    li #[a(href='https://nodejs.org', title='Node.js') Node.js] >= 6
+    li #[a(href='https://maven.apache.org/', title='Maven') Maven] >= 3 
+    li= _.HANDBOOK.REQS_LIST.ARCHETYPE
+    li= _.HANDBOOK.REQS_LIST.SCRIPT
+
+  h2= _.HANDBOOK.TITLE_GO
+  p= _.HANDBOOK.SCRIPT_INTRO
+
+  pre= "$ node prompt_script.js <file.xcore> [-parameter=value]*"
+  ul 
+    li #[em= "file.xcore"] : #{_.HANDBOOK.SCRIPT_EXPLANATION.FILE}
+    li #[em="-parameter=value"] : #{_.HANDBOOK.SCRIPT_EXPLANATION.PARAMETER}
+
+  p= _.HANDBOOK.LIST_PARAMETERS
+  ul
+    li artifactID
+    li groupID
+    li version
+    li artifactName
+    li artifactDescription
+    li artifactURL
+    li year
+    li organization
+  
+  p= _.HANDBOOK.EXAMPLE
+
+  pre $ node prompt_script.js /home/user/Documents/File.xcore -artifactName=MyArtifact -artifactDescription="This is a description."
+  
+  p= _.HANDBOOK.SCRIPT_PROMPT
+  p!= _.HANDBOOK.CONCLUSION
+
+

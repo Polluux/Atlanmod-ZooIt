@@ -40,5 +40,24 @@
         "BUTTON_PR": "Do the Zoo PR",
         "BUTTON_MAVEN": "Download the Maven artifact",
         "OPERATION": "The operation can take up to two minutes."
+    },
+    "HANDBOOK": {
+        "TITLE": "Create a Maven artifact from an XCore file",
+        "TITLE_REQS": "Requirements",
+        "TITLE_GO": "Generate with the script",
+        "REQS_LIST" : {
+            "XCORE" : "Your XCore file",
+            "ARCHETYPE" : "This archetype",
+            "SCRIPT" : "This script"
+        },
+        "SCRIPT_INTRO": "It is easy to generate your artifact: you only need to run the script. It can be use this way:",
+        "SCRIPT_EXPLANATION" : {
+            "FILE" : "a relative or absolute path to the file.xcore to be transformed.",
+            "PARAMETER" : "a list of parameters which can be passed to pre-fill the attributes of the artifact to be generated."
+        },
+        "LIST_PARAMETERS" : "Here is a list of parameters you can use. Some of the parameters are mandatory so if you don't give them now, you will need to fill them afterward.",
+        "EXAMPLE": "Here is an exemple of the script utilization:",
+        "SCRIPT_PROMPT" : "Once the script is started, it will ask you to fill the information that you didn't mentioned in the command line. Optional information can be skipped by simply typing enter. If an information is mentioned to be filled but you already pre-filled it, it means it was incorrect.",
+        "CONCLUSION" : "The artifact generated is zipped and located in the <em>/temp</em> directory with the name <em>timestamp_artifactID.zip</em> (the full name is given by the script at the end of the execution). <br> Of course, you are free to open the <em>pom.xml</em> and modify it as you wish."
     }
 }

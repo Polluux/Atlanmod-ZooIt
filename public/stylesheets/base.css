@@ -36,3 +36,9 @@ ul {
 	list-style-type: circle;
 }
 
+pre {
+	background-color: #EDEDED;
+	padding: 1em;
+	font-family: courier;
+	overflow: scroll;
+}

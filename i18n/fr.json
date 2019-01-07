@@ -40,5 +40,24 @@
     "BUTTON_PR": "Faire une PR du zoo",
     "BUTTON_MAVEN": "Télécharger l'artefact Maven",
     "OPERATION": "L'opération peut prendre jusqu'à deux minutes."
-  }
+  },
+  "HANDBOOK": {
+      "TITLE": "Créer un artefact Maven à partir d'un fichier XCore",
+      "TITLE_REQS": "Pré-requis",
+      "TITLE_GO": "Génération à l'aide du script",
+      "REQS_LIST" : {
+          "XCORE" : "Votre fichier XCore",
+          "ARCHETYPE" : "Cet archetype",
+          "SCRIPT" : "Ce script, dans le même dossier"
+      },
+      "SCRIPT_INTRO": "La génération d'un artefact est alors très simple : il suffit d'utiliser le script comme suit.",
+      "SCRIPT_EXPLANATION" : {
+        "FILE" : "un chemin relatif ou absolu vers le file.xcore à transformer.",
+        "PARAMETER" : "une liste de paramètres pour pré-remplir les attributs de l'artefact à générer."
+    },
+    "LIST_PARAMETERS" : "Voici la liste des paramètres utilisables. Certains sont obligatoires donc si vous ne les donnez pas maintenant, vous devrez les remplir à l'exécution du script.",
+    "EXAMPLE": "Voici un exemple de l'utilisation du script :",
+    "SCRIPT_PROMPT" : "Une fois que le script est lancé, il vous demandera de remplir les informations que vous n'avez pas rempli dans la ligne de commande. Les champs optionnels peuvent être laissés vides en tapant 'Entrée'. Si un champs est à remplir alors que vous l'avez passé en ligne de commande, cela signifie qu'il était incorrect.",
+    "CONCLUSION" : "L'artéfact ainsi généré est zippé et localisé dans <em>/temp</em> avec comme nom <em>timestamp_artifactID.zip</em> (Le nom complet est donné par le script à la fin de l'exécution). <br> Bien sûr, vous êtes libres de revenir modifier le <em> pom.xml</em> après coup à votre guise."
+}
 }
