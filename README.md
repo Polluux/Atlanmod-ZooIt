@@ -44,12 +44,12 @@ Starting from `/`, the project is organised as follows :
  - `tests` : testing process for artefact generation
 
 ## Online automatic artefact generation process :
-The main goal of Atlanmod-Zooit is to provide an automatic online process to generate a complete maven artefact for an EMF XCore model. The generated artefact is able to generate the source code of the model and can be easily built to be deployed on the Maven Central Repository. The generation process is based on *maven archetypes*. 
+The main goal of Atlanmod-Zooit is to provide an automatic online process to generate a complete maven artefact for an EMF Xcore model. The generated artefact is able to generate the source code of the model and can be easily built to be deployed on the Maven Central Repository. The generation process is based on *maven archetypes*. 
 
-The process to automatically generate a Maven artefact from an XCore, requires you to :
+The process to automatically generate a Maven artefact from an Xcore, requires you to :
 - Connect to the Atlanmod-Zooit website (https://atlanmod-zooit.herokuapp.com/)
-- Choose the **Automatic** generation of artefact based on an XCore model
-- Upload the XCore file containing your model
+- Choose the **Automatic** generation of artefact based on an Xcore model
+- Upload the Xcore file containing your model
 - Fill all required fields.
 - *Optional* : fill the maven deployment required fields and the other optional fields
 - Generate and download your artefact (the process can take multiple seconds)
