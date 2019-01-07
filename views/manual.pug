@@ -9,9 +9,15 @@ block content
   ul
     li= _.HANDBOOK.REQS_LIST.XCORE
     li #[a(href='https://nodejs.org', title='Node.js') Node.js] >= 6
-    li #[a(href='https://maven.apache.org/', title='Maven') Maven] >= 3 
-    li= _.HANDBOOK.REQS_LIST.ARCHETYPE
-    li= _.HANDBOOK.REQS_LIST.SCRIPT
+    li #[a(href='https://maven.apache.org/', title='Maven') Maven] >= 3
+    li git
+
+  h2= _.HANDBOOK.TITLE_INSTALL
+  pre
+    |$ git clone https://github.com/Polluux/Atlanmod-ZooIt
+    |$ cd Atlanmod-ZooIt
+    |$ npm run initialize
+    |$ cd services/
 
   h2= _.HANDBOOK.TITLE_GO
   p= _.HANDBOOK.SCRIPT_INTRO

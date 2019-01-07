@@ -26,6 +26,11 @@ router.get('/manual', function(req, res) {
   res.render('manual');
 });
 
+/* GET manual page. */
+router.get('/manual/script/', function(req, res) {
+  res.download(path.join(__dirname,"/services/prompt_script.js"), "prompt_script.js");
+});
+
 /* POST file input */
 router.post('/file', function(req, res, next){
 

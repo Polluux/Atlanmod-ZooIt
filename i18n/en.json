@@ -9,7 +9,7 @@
     },
     "HOME_WORDING": {
         "INTRO": "Zoo it! is a free service by and for the <a href='https://www.ls2n.fr/', title='Laboratoire des Sciences du Numérique de Nantes', target='_blank'> LS2N</a> in ordrer to repopulate the <a href='http://web.imt-atlantique.fr/x-info/atlanmod/index.php?title=Zoos', title='Atlanmod Zoos', target='_blank'> zoo</a>.",
-        "SECTION_MAVEN_TITLE": "Transform your <em>XCore</em> file into <em>Maven artifacts</em>.",
+        "SECTION_MAVEN_TITLE": "Transform your <em>Xcore</em> file into <em>Maven artifacts</em>.",
         "SECTION_MAVEN_INTRO": "Do easily the conversion with our tool or read the handbook for a step-to-step formula.",
         "SECTION_PR_TITLE": "Do effortlessly your <a href='https://github.com/atlanmod/zoo', title='Atlanmod Zoo on GitHub', target='_blank'> zoo</a> <em>pull request</em>."
     },
@@ -19,7 +19,7 @@
     },
     "FORM": {
         "SECTION": {
-            "FILE": "Your XCore file",
+            "FILE": "Your Xcore file",
             "MANDATORY": "Mandatory fields",
             "CENTRAL": "Mandatory fields to deploy on Maven Central",
             "CENTRAL_INFO": "For more info, see <a href='https://central.sonatype.org/pages/requirements.html', target='_blank'> the documentation</a>.",
@@ -42,13 +42,12 @@
         "OPERATION": "The operation can take up to two minutes."
     },
     "HANDBOOK": {
-        "TITLE": "Create a Maven artifact from an XCore file",
+        "TITLE": "Create a Maven artifact from an Xcore file",
         "TITLE_REQS": "Requirements",
+        "TITLE_INSTALL": "Install the app",
         "TITLE_GO": "Generate with the script",
         "REQS_LIST" : {
-            "XCORE" : "Your XCore file",
-            "ARCHETYPE" : "This archetype",
-            "SCRIPT" : "This script"
+            "XCORE" : "Your Xcore file"
         },
         "SCRIPT_INTRO": "It is easy to generate your artifact: you only need to run the script. It can be use this way:",
         "SCRIPT_EXPLANATION" : {

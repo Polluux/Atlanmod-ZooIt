@@ -27,7 +27,7 @@ block content
     const pond = FilePond.create( inputElement , {
       server: '/file',
     });
-    pond.labelIdle += " XCore files",
+    pond.labelIdle += " Xcore files",
     pond.onaddfilestart = function(file){
       if (file.fileExtension.trim() == "xcore"){return}
       pond.removeFile() ;
