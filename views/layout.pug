@@ -17,9 +17,11 @@ html
       p Don't let your Xcore be just Xcore !
 
       ul#i18n
-        li #[a(href="?clang=en" title="English") 🇬🇧]
+        li.clickable(title="English", onclick="change_lang('en')") 🇬🇧
         li |
-        li #[a(href="?clang=fr", title="Français") 🇫🇷]
+        li.clickable(title="Français", onclick="change_lang('fr')") 🇫🇷
 
     .block
       block content
+  
+  script(type="text/javascript", src="/scripts/i18n.js")

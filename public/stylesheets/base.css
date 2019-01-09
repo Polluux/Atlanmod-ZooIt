@@ -37,8 +37,12 @@ ul {
 }
 
 pre {
-	background-color: #EDEDED;
+	background-color: var(--light-gray);
 	padding: 1em;
 	font-family: courier;
-	overflow: scroll;
+	overflow-x: scroll;
+}
+
+.clickable{
+	cursor: pointer;
 }
