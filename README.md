@@ -102,4 +102,4 @@ Atlanmod-ZooIt can perform an automatic request to add a newly generated artifac
  - Commit and push of the newly generated artifact with the correct root `pom.xml` on the user's branch of the AtlanmodZoo fork.
  - Creation of a `pull request` of the user's branch on the AtlanmodZoo to suggest the new artifact.
 
-[Github artifact request simplified schema](resources/github_request.png)
+![Github artifact request simplified schema](resources/github_request.png)
