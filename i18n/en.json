@@ -57,6 +57,7 @@
         "LIST_PARAMETERS" : "Here is a list of parameters you can use. Some of the parameters are mandatory so if you don't give them now, you will need to fill them afterward.",
         "EXAMPLE": "Here is an exemple of the script utilization:",
         "SCRIPT_PROMPT" : "Once the script is started, it will ask you to fill the information that you didn't mentioned in the command line. Optional information can be skipped by simply typing enter. If an information is mentioned to be filled but you already pre-filled it, it means it was incorrect.",
-        "CONCLUSION" : "The artifact generated is zipped and located in the <em>/temp</em> directory with the name <em>timestamp_artifactID.zip</em> (the full name is given by the script at the end of the execution). <br> Of course, you are free to open the <em>pom.xml</em> and modify it as you wish."
+        "CONCLUSION" : "The artifact generated is zipped and located in the <em>/temp</em> directory with the name <em>timestamp_artifactID.zip</em> (the full name is given by the script at the end of the execution). <br> Of course, you are free to open the <em>pom.xml</em> and modify it as you wish.",
+        "SEE_ZOO" : "Please consider contribute to <a href='https://github.com/atlanmod/zoo', title='Atlanmod Zoo on GitHub', target='_blank'> the Atlanmod Zoo</a> using <a href='/github-oauth', title='Go to form after authenticate'>our tool</a>."
     }
 }
