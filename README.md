@@ -44,10 +44,10 @@ Starting from `/`, the project is organised as follows :
  - `tests` : testing process for artefact generation
 
 ## Online automatic artefact generation process :
-The main goal of Atlanmod-Zooit is to provide an automatic online process to generate a complete maven artefact for an EMF Xcore model. The generated artefact is able to generate the source code of the model and can be easily built to be deployed on the Maven Central Repository. The generation process is based on *maven archetypes*. 
+The main goal of Atlanmod-ZooIt is to provide an automatic online process to generate a complete maven artefact for an EMF Xcore model. The generated artefact is able to generate the source code of the model and can be easily built to be deployed on the Maven Central Repository. The generation process is based on *maven archetypes*. 
 
 The process to automatically generate a Maven artefact from an Xcore, requires you to :
-- Connect to the Atlanmod-Zooit website (https://atlanmod-zooit.herokuapp.com/)
+- Connect to the Atlanmod-ZooIt website (https://atlanmod-zooit.herokuapp.com/)
 - Choose the **Automatic** generation of artefact based on an Xcore model
 - Upload the Xcore file containing your model
 - Fill all required fields.
@@ -89,11 +89,17 @@ Once the script is started, it will asks you to fill the information that you di
 The artifact generated is zipped and located in the `/temp` directory with the name : `<timestamp>_<artifactID>.zip` (fhe full name is given by the script at the end of the execution).
 
 
-## AtlanmodZoo : Github artifact request process :
-Atlanmod-Zooit can perform an automatic request to add a newly generated artifact to the AtlanmodZoo Github repository (accessible at this [link](https://github.com/atlanmod/zoo)). The generation process to perform a request on the Zoo is different from the generation process of a standalone artifact and it requires the user to be authenticated with a Github account. The complete process uses the official Github REST API (available [here](https://developer.github.com/v3/)) and is discribed as follows :
+## AtlanmodZoo : How to collaborate ?
+The AtlanmodZoo is a collaborative and open-source set of EMF models. Stored models can be easily integrated in other projects and Java source code can be generated from them. AtlanmodZoo is available at this [address](https://github.com/atlanmod/zoo).
+
+Atlanmod-ZooIt allows you to easily collaborate to the AtlanmodZoo with an atomatic process that can perform a complete pull request from an Xcore model. The process is described right after.
+### Github artifact request process :
+Atlanmod-ZooIt can perform an automatic request to add a newly generated artifact to the AtlanmodZoo Github repository. The generation process to perform a request on the Zoo is different from the generation process of a standalone artifact and it requires the user to be authenticated with a Github account. The complete process uses the official Github REST API (available [here](https://developer.github.com/v3/)) and is discribed as follows :
  - Generation of the artifact as `child artifact` of the complete AtlanmodZoo Maven artifact.
  - Request and modification of the last AtlanmodZoo root `pom.xml` to add the newly generated artifact.
  - Creation of a fork based on the AtlanmodZoo repository for the current connected Github user (if a fork already exists, it is used).
  - Instantiation of a new branch on the user's fork based on the artifact name.
  - Commit and push of the newly generated artifact with the correct root `pom.xml` on the user's branch of the AtlanmodZoo fork.
  - Creation of a `pull request` of the user's branch on the AtlanmodZoo to suggest the new artifact.
+
+[Github artifact request simplified schema](resources/github_request.png)
